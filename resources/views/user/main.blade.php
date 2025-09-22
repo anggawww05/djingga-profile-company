@@ -8,8 +8,10 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body>
-    @include('components.header')
-    <main class="mt-10">
+    <div class="sticky top-0 z-50">
+        @include('components.header')
+    </div>
+    <main>
         @yield('container')
     </main>
     @include('components.footer')
