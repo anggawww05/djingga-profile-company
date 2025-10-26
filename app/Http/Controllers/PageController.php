@@ -18,22 +18,50 @@ class PageController extends Controller
 
     public function indexProject()
     {
-        return view('user.project.project');
+        $projects = \App\Models\Project::orderBy('created_at', 'desc')->paginate(10);
+        return view('user.project.project', compact('projects'));
     }
 
-    public function indexDetailProject()
+    public function indexDetailProject($id)
     {
-        return view('user.project.detail-project');
+        $project = \App\Models\Project::findOrFail($id);
+        return view('user.project.detail-project', compact('project'));
+    }
+
+    public function indexFullProject()
+    {
+        $query = \App\Models\Project::orderBy('created_at', 'desc');
+
+        // Handle search
+        if (request()->has('search') && request('search') != '') {
+            $searchTerm = request('search');
+            $query->where(function ($q) use ($searchTerm) {
+            $q->where('title', 'like', '%' . $searchTerm . '%')
+                ->orWhere('description', 'like', '%' . $searchTerm . '%');
+            });
+        }
+
+        $projects = $query->paginate(12)->withQueryString();
+        return view('user.project.full-project', compact('projects'));
     }
 
     public function indexActivity()
     {
-        return view('user.activity.activity');
+        $activities = \App\Models\Activity::orderBy('created_at', 'desc')->paginate(10);
+        return view('user.activity.activity', compact('activities'));
+    }
+
+    public function indexDetailActivity()
+    {
+        $activity = \App\Models\Activity::findOrFail(request()->route('id'));
+        return view('user.activity.detail-activity', compact('activity'));
     }
 
     public function indexConsultation()
     {
-        return view('consultation.consultation');
+        // Provide services list to the consultation view
+        $services = \App\Models\Service::orderBy('service_name')->get();
+        return view('user.consultation.consultation', compact('services'));
     }
 
 
@@ -42,4 +70,3 @@ class PageController extends Controller
         return view('admin.dashboard.dashboard');
     }
 }
-

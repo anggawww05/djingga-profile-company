@@ -16,4 +16,9 @@ class Consultation extends Model
         'service',
         'description',
     ];
+
+    public function service()
+    {
+        return $this->belongsTo(Service::class, 'service_id');
+    }
 }

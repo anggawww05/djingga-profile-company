@@ -2,7 +2,7 @@
 
 @section('container')
 
-    <section id="cover" class="relative bg-gradient-to-br from-[#578E7E] to-[#23272F] py-20 overflow-hidden mt-20">
+    <section id="cover" class="relative bg-gradient-to-br from-[#578E7E] to-[#23272F] py-20 overflow-hidden mt-5">
         <div class="max-w-6xl mx-auto px-6 md:px-12 text-center relative z-10">
             <h1 class="text-4xl md:text-5xl font-bold text-white mb-4">
                 Consultation Services
@@ -243,22 +243,5 @@
         </div>
         <div class="absolute bottom-0 left-0 w-32 h-32 bg-[#52a08a]/10 rounded-full blur-2xl -z-10"></div>
         <div class="absolute top-0 right-0 w-48 h-48 bg-[#578E7E]/10 rounded-full blur-3xl -z-10"></div>
-    </section>
-
-    {{-- Call to Action --}}
-    <section class="py-16 bg-gradient-to-br from-[#578E7E] to-[#23272F] relative">
-        <div class="max-w-6xl mx-auto px-6 md:px-12 text-center">
-            <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">
-                Siap Berkolaborasi dengan Tim Kami?
-            </h2>
-            <p class="text-lg text-white/90 mb-8 max-w-2xl mx-auto">
-                Tim profesional kami siap membantu mewujudkan visi digital perusahaan Anda. Mari berkolaborasi untuk kesuksesan bersama.
-            </p>
-            <a href="#" class="inline-block bg-[#52a08a] hover:bg-[#466e62] text-white font-semibold py-3 px-10 rounded-full shadow-xl transition-all duration-200 text-lg">
-                Hubungi Kami Sekarang
-            </a>
-        </div>
-        <div class="absolute top-0 left-0 w-32 h-32 bg-white/10 rounded-full blur-2xl"></div>
-        <div class="absolute bottom-0 right-0 w-48 h-48 bg-[#52a08a]/10 rounded-full blur-3xl"></div>
     </section>
 @endsection

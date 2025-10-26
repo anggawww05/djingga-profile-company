@@ -65,7 +65,7 @@ class ProjectController extends Controller
     public function edit($id)
     {
         $project = \App\Models\Project::findOrFail($id);
-        return view('admin.project.edit-project');
+        return view('admin.project.edit-project', compact('project'));
     }
 
     public function update(Request $request, $id)
@@ -92,7 +92,7 @@ class ProjectController extends Controller
         $project->link = $data['link'] ?? null;
         $project->save();
 
-        return redirect()->route('admin.projects.index')->with('success', 'Project updated successfully.');
+        return redirect()->route('manage-project')->with('success', 'Project updated successfully.');
     }
 
     public function detail($id)
@@ -111,6 +111,6 @@ class ProjectController extends Controller
 
         $project->delete();
 
-        return redirect()->route('admin.projects.index')->with('success', 'Project deleted successfully.');
+        return redirect()->route('manage-project')->with('success', 'Project deleted successfully.');
     }
 }

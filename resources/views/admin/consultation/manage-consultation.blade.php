@@ -6,15 +6,15 @@
     <div class="mb-6">
         <div class="flex items-center justify-between">
             <div>
-                <h1 class="text-2xl font-bold text-[#23272F]">Manage Projects</h1>
-                <p class="text-gray-600 mt-1">Kelola semua project yang telah dikerjakan</p>
+                <h1 class="text-2xl font-bold text-[#23272F]">Manage Consultations</h1>
+                <p class="text-gray-600 mt-1">Kelola semua permintaan konsultasi yang masuk</p>
             </div>
-            <a href="{{ route('manage-project.add') }}"
+            <a href="{{ route('manage-consultation.add') }}"
                 class="bg-[#52a08a] hover:bg-[#466e62] text-white font-semibold py-2 px-6 rounded-lg shadow-lg transition-all duration-200 flex items-center gap-2">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
                 </svg>
-                Tambah Project
+                Tambah Konsultasi
             </a>
         </div>
     </div>
@@ -38,38 +38,46 @@
                 <thead class="bg-gradient-to-r from-[#52a08a]/10 to-[#578E7E]/10">
                     <tr>
                         <th class="px-6 py-4 text-left text-xs font-semibold text-[#23272F] uppercase tracking-wider">
-                            #
+                            No
                         </th>
                         <th class="px-6 py-4 text-left text-xs font-semibold text-[#23272F] uppercase tracking-wider">
-                            Title
+                            Name
                         </th>
                         <th class="px-6 py-4 text-left text-xs font-semibold text-[#23272F] uppercase tracking-wider">
-                            Description
+                            Company
                         </th>
                         <th class="px-6 py-4 text-left text-xs font-semibold text-[#23272F] uppercase tracking-wider">
-                            Link
-                        </th>
-                        <th class="px-6 py-4 text-left text-xs font-semibold text-[#23272F] uppercase tracking-wider">
-                            Image
+                            Service
                         </th>
                         <th class="px-6 py-4 text-center text-xs font-semibold text-[#23272F] uppercase tracking-wider">
-                            Actions
+                            Description
+                        </th>
+                        <th class="px-6 py-4 text-center text-xs font-semibold text-[#23272F] uppercase tracking-wider">
+                            Action
                         </th>
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-gray-200">
-                    @forelse ($projects as $project)
+                    @forelse ($consultations as $consultation)
                         <tr class="hover:bg-[#52a08a]/5 transition-colors duration-150">
                             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                                 {{ $loop->iteration }}
                             </td>
                             <td class="px-6 py-4 text-sm font-semibold text-[#23272F]">
-                                {{ $project->title }}
+                                {{ $consultation->name }}
                             </td>
                             <td class="px-6 py-4 text-sm text-gray-600 max-w-md">
-                                {{ Str::limit($project->description, 80) }}
+                                {{ $consultation->company ?? '-' }}
+                                {{-- {{ Str::limit($project->description, 80) }} --}}
                             </td>
-                            <td class="px-6 py-4 text-sm">
+                            <td class="px-6 py-4 text-sm text-gray-600 max-w-md">
+                                {{ optional($consultation->serviceRef)->service_name ?? ($consultation->service ?? '-') }}
+                                {{-- {{ Str::limit($project->description, 80) }} --}}
+                            </td>
+                            <td class="px-6 py-4 text-sm text-gray-600 max-w-md">
+                                {{ Str::limit($consultation->description, 80) }}
+                            </td>
+                            {{-- <td class="px-6 py-4 text-sm">
                                 @if ($project->link)
                                     <a href="{{ $project->link }}" target="_blank"
                                         class="text-[#52a08a] hover:text-[#466e62] font-medium hover:underline">
@@ -78,8 +86,8 @@
                                 @else
                                     <span class="text-gray-400">-</span>
                                 @endif
-                            </td>
-                            <td class="px-6 py-4 text-sm">
+                            </td> --}}
+                            {{-- <td class="px-6 py-4 text-sm">
                                 @if ($project->image)
                                     <img src="{{ asset('storage/' . $project->image) }}" alt="Project Image"
                                         class="w-20 h-12 object-cover rounded-lg shadow-sm">
@@ -93,11 +101,11 @@
                                         </svg>
                                     </div>
                                 @endif
-                            </td>
+                            </td> --}}
                             <td class="px-6 py-4 whitespace-nowrap text-center">
                                 <div class="flex items-center justify-center gap-2">
                                     {{-- Detail Button --}}
-                                    <a href="{{ route('manage-project.detail', $project->id) }}"
+                                    <a href="{{ route('manage-consultation.detail', $consultation->id)}}"
                                         class="inline-flex items-center px-3 py-1.5 bg-blue-500 hover:bg-blue-600 text-white text-sm font-medium rounded-lg transition-colors duration-200">
                                         <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -109,13 +117,13 @@
                                     </a>
 
                                     {{-- Edit Button --}}
-                                    <a href="{{ route('manage-project.edit', $project->id) }}"
+                                    <a href="{{ route('manage-consultation.edit', $consultation->id) }}"
                                         class="inline-flex items-center px-3 py-1.5 bg-[#52a08a] hover:bg-[#466e62] text-white text-sm font-medium rounded-lg transition-colors duration-200">
                                         Edit
                                     </a>
 
                                     {{-- Delete Button --}}
-                                    <form action="{{ route('manage-project.delete', $project->id) }}" method="POST" onsubmit="return confirm('Yakin ingin menghapus project ini? Tindakan ini tidak bisa dibatalkan.');">
+                                    <form action="{{ route('manage-consultation.delete', $consultation->id)}}" method="POST" onsubmit="return confirm('Yakin ingin menghapus project ini? Tindakan ini tidak bisa dibatalkan.');">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit"
