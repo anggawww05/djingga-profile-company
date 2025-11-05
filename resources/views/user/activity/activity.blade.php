@@ -5,12 +5,11 @@
     <section id="cover" class="relative bg-gradient-to-br from-[#578E7E] to-[#23272F] py-20 overflow-hidden mt-5">
         <div class="max-w-6xl mx-auto px-6 md:px-12 text-center relative z-10">
             <h1 class="text-4xl md:text-5xl font-bold text-white mb-4">
-                Company Activities
+                Aktivitas Perusahaan
             </h1>
             <div class="w-20 h-1 bg-[#52a08a] rounded mx-auto mb-6"></div>
             <p class="text-lg text-white/90 max-w-2xl mx-auto">
-                Ikuti berbagai kegiatan dan acara menarik yang diselenggarakan oleh Djingga Company untuk membangun
-                komunitas dan berbagi pengetahuan.
+                Perusahaan kami terus berinovasi dan berkembang melalui berbagai aktivitas yang mencerminkan komitmen kami terhadap teknologi dan layanan berkualitas tinggi.
             </p>
         </div>
         <div class="absolute top-0 right-0 w-48 h-48 bg-[#52a08a]/10 rounded-full blur-3xl"></div>
@@ -28,8 +27,8 @@
                         <div class="relative overflow-hidden">
                             <div
                                 class="h-48 bg-gradient-to-br from-[#52a08a] to-[#578E7E] flex items-center justify-center">
-                                @if (!empty($activity->image))
-                                    <img src="{{ asset('storage/' . $activity->image) }}" alt="{{ $activity->title }}"
+                                @if (!empty($activity->image_cover))
+                                    <img src="{{ asset('storage/' . $activity->image_cover) }}" alt="{{ $activity->title }}"
                                         class="object-cover w-full h-48" />
                                 @else
                                     <div class="text-white text-center px-4">
@@ -43,39 +42,20 @@
                             </div>
                         </div>
                         <div class="p-6">
-                            {{-- <div class="flex items-center gap-2 mb-2">
-                            <svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
-                            </svg>
-                            {{-- <span class="text-sm text-gray-500">22 Oktober 2025</span>
-                        </div> --}}
                             <h3 class="text-xl font-bold text-[#23272F] mb-2 group-hover:text-[#52a08a] transition-colors">
                                 {{ $activity->title }}
                             </h3>
-                            <p class="text-gray-600 text-sm leading-relaxed mb-4">
-                                {{ $activity->description }}
+                            <p class="text-gray-600 text-sm leading-relaxed mb-4 text-justify">
+                                {{ \Illuminate\Support\Str::limit($activity->description ?? ($activity->excerpt ?? '-'), 140) }}
                             </p>
-                            {{-- <div class="flex flex-wrap gap-2 mb-4">
-                            <span class="px-2 py-1 bg-[#52a08a]/10 text-[#52a08a] rounded-full text-xs font-medium">React</span>
-                            <span class="px-2 py-1 bg-[#52a08a]/10 text-[#52a08a] rounded-full text-xs font-medium">Laravel</span>
-                            <span class="px-2 py-1 bg-[#52a08a]/10 text-[#52a08a] rounded-full text-xs font-medium">Modern Tools</span>
-                        </div> --}}
-                            <div class="flex items-center justify-between">
-                                {{-- <div class="flex items-center gap-1">
-                                <svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                            <a href="{{ route('activity.detail', $activity->id) }}"
+                                class="text-[#52a08a] hover:text-[#466e62] font-semibold text-sm flex items-center gap-1">
+                                Lihat Detail
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M9 5l7 7-7 7" />
                                 </svg>
-                                {{-- <span class="text-sm text-gray-500">09:00 - 17:00</span>
-                            </div> --}}
-                                <a href="#"
-                                    class="text-[#52a08a] hover:text-[#466e62] font-semibold text-sm flex items-center gap-1">
-                                    Lihat Detail
-                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M9 5l7 7-7 7" />
-                                    </svg>
-                                </a>
-                            </div>
+                            </a>
                         </div>
                     </div>
                 @empty
@@ -85,12 +65,16 @@
                 @endforelse
             </div>
             {{-- Load More Button --}}
-            <div class="text-center mt-12">
-                <button
-                    class="bg-[#52a08a] hover:bg-[#466e62] text-white font-semibold py-3 px-10 rounded-full shadow-xl transition-all duration-200 text-lg">
-                    Load More Activities
-                </button>
-            </div>
+            @if ($activities->count() === 0)
+                <div>-</div>
+            @else
+                <div class="text-center mt-12">
+                    <a href ="{{ route('activity.full') }}"
+                        class="bg-[#52a08a] hover:bg-[#466e62] text-white font-semibold py-3 px-10 rounded-full shadow-xl transition-all duration-200 text-lg">
+                        Lihat Semua
+                    </a>
+                </div>
+            @endif
         </div>
         <div class="absolute top-0 left-0 w-32 h-32 bg-[#52a08a]/10 rounded-full blur-2xl -z-10"></div>
         <div class="absolute bottom-0 right-0 w-48 h-48 bg-[#578E7E]/10 rounded-full blur-3xl -z-10"></div>

@@ -24,11 +24,20 @@ class DatabaseSeeder extends Seeder
         //     ],
         // ]);
 
-        \Illuminate\Support\Facades\DB::table('users')->insert([
+        // \Illuminate\Support\Facades\DB::table('users')->insert([
+        //     [
+        //         'name' => 'Admin',
+        //         'email' => 'admin@djingga.com',
+        //         'password' => bcrypt('admin123'),
+        //     ],
+        // ]);
+
+        \Illuminate\Support\Facades\DB::table('category_activities')->insert([
             [
-                'name' => 'Admin',
-                'email' => 'admin@djingga.com',
-                'password' => bcrypt('admin123'),
+                'category_name' => 'category a',
+            ],
+            [
+                'category_name' => 'category b',
             ],
         ]);
     }

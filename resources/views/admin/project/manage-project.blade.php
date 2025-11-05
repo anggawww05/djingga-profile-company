@@ -9,13 +9,25 @@
                 <h1 class="text-2xl font-bold text-[#23272F]">Manage Projects</h1>
                 <p class="text-gray-600 mt-1">Kelola semua project yang telah dikerjakan</p>
             </div>
-            <a href="{{ route('manage-project.add') }}"
-                class="bg-[#52a08a] hover:bg-[#466e62] text-white font-semibold py-2 px-6 rounded-lg shadow-lg transition-all duration-200 flex items-center gap-2">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
-                </svg>
-                Tambah Project
-            </a>
+            @if ($projects->count() > 0)
+                <div class="flex items-center gap-3">
+                    <div class="flex items-center gap-4">
+                        <form action="{{ route('manage-project') }}" method="GET" class="flex items-center">
+                            <input type="text" name="q" value="{{ request('q') }}" placeholder="Cari project..."
+                                class="px-3 py-2 border border-gray-300 rounded-l-md focus:outline-none" />
+                            <button type="submit" class="px-3 py-2 bg-[#52a08a] text-white rounded-r-md">Cari</button>
+                        </form>
+
+                        <a href="{{ route('manage-project.add') }}"
+                            class="bg-[#52a08a] hover:bg-[#466e62] text-white font-semibold py-2 px-6 rounded-lg shadow-lg transition-all duration-200 flex items-center gap-2">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+                            </svg>
+                            Tambah Project
+                        </a>
+                    </div>
+                </div>
+            @endif
         </div>
     </div>
 
@@ -38,7 +50,7 @@
                 <thead class="bg-gradient-to-r from-[#52a08a]/10 to-[#578E7E]/10">
                     <tr>
                         <th class="px-6 py-4 text-left text-xs font-semibold text-[#23272F] uppercase tracking-wider">
-                            #
+                            No
                         </th>
                         <th class="px-6 py-4 text-left text-xs font-semibold text-[#23272F] uppercase tracking-wider">
                             Title
@@ -115,7 +127,8 @@
                                     </a>
 
                                     {{-- Delete Button --}}
-                                    <form action="{{ route('manage-project.delete', $project->id) }}" method="POST" onsubmit="return confirm('Yakin ingin menghapus project ini? Tindakan ini tidak bisa dibatalkan.');">
+                                    <form action="{{ route('manage-project.delete', $project->id) }}" method="POST"
+                                        onsubmit="return confirm('Yakin ingin menghapus project ini? Tindakan ini tidak bisa dibatalkan.');">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit"
@@ -136,7 +149,7 @@
                                     </svg>
                                     <p class="text-lg font-medium mb-2">Belum ada project</p>
                                     <p class="text-sm mb-4">Mulai tambahkan project pertama Anda</p>
-                                    <a href="#"
+                                    <a href="{{ route('manage-project.add') }}"
                                         class="bg-[#52a08a] hover:bg-[#466e62] text-white font-semibold py-2 px-6 rounded-lg shadow-lg transition-all duration-200">
                                         Tambah Project
                                     </a>
@@ -146,6 +159,7 @@
                     @endforelse
                 </tbody>
             </table>
+            {{ $projects->links('components.pagination') }}
         </div>
     </div>
 @endsection

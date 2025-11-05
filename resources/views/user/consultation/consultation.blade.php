@@ -2,10 +2,10 @@
 
 @section('container')
     {{-- Hero Section --}}
-    <section id="cover" class="relative bg-gradient-to-br from-[#578E7E] to-[#23272F] py-20 overflow-hidden mt-20">
+    <section id="cover" class="relative bg-gradient-to-br from-[#578E7E] to-[#23272F] py-20 overflow-hidden mt-5">
         <div class="max-w-6xl mx-auto px-6 md:px-12 text-center relative z-10">
             <h1 class="text-4xl md:text-5xl font-bold text-white mb-4">
-                Consultation Services
+                Layanan Konsultasi
             </h1>
             <div class="w-20 h-1 bg-[#52a08a] rounded mx-auto mb-6"></div>
             <p class="text-lg text-white/90 max-w-2xl mx-auto">

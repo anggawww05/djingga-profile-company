@@ -42,7 +42,7 @@
             </div>
             <div class="flex-1">
                 <span class="text-[#23272F] font-medium group-hover:text-[#52a08a] transition-colors">Dashboard</span>
-                <p class="text-xs text-gray-500 group-hover:text-[#52a08a]/70">Overview & Analytics</p>
+                {{-- <p class="text-xs text-gray-500 group-hover:text-[#52a08a]/70">Overview & Analytics</p> --}}
             </div>
             <div class="opacity-0 group-hover:opacity-100 transition-opacity">
                 <svg class="w-4 h-4 text-[#52a08a]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -63,8 +63,8 @@
                 </svg>
             </div>
             <div class="flex-1">
-                <span class="text-[#23272F] font-medium group-hover:text-[#578E7E] transition-colors">Project</span>
-                <p class="text-xs text-gray-500 group-hover:text-[#578E7E]/70">Manage Projects</p>
+                <span class="text-[#23272F] font-medium group-hover:text-[#578E7E] transition-colors">Proyek</span>
+                {{-- <p class="text-xs text-gray-500 group-hover:text-[#578E7E]/70">Manage Projects</p> --}}
             </div>
             <div class="opacity-0 group-hover:opacity-100 transition-opacity">
                 <svg class="w-4 h-4 text-[#578E7E]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -85,8 +85,8 @@
                 </svg>
             </div>
             <div class="flex-1">
-                <span class="text-[#23272F] font-medium group-hover:text-[#466e62] transition-colors">Activities</span>
-                <p class="text-xs text-gray-500 group-hover:text-[#466e62]/70">Events & Updates</p>
+                <span class="text-[#23272F] font-medium group-hover:text-[#466e62] transition-colors">Aktivitas</span>
+                {{-- <p class="text-xs text-gray-500 group-hover:text-[#466e62]/70">Events & Updates</p> --}}
             </div>
             <div class="opacity-0 group-hover:opacity-100 transition-opacity">
                 <svg class="w-4 h-4 text-[#466e62]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -108,8 +108,8 @@
             </div>
             <div class="flex-1">
                 <span
-                    class="text-[#23272F] font-medium group-hover:text-[#23272F] transition-colors">Consultation</span>
-                <p class="text-xs text-gray-500 group-hover:text-[#23272F]/70">Client Consultations</p>
+                    class="text-[#23272F] font-medium group-hover:text-[#23272F] transition-colors">Konsultasi</span>
+                {{-- <p class="text-xs text-gray-500 group-hover:text-[#23272F]/70">Client Consultations</p> --}}
             </div>
             <div class="opacity-0 group-hover:opacity-100 transition-opacity">
                 <svg class="w-4 h-4 text-[#23272F]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -121,24 +121,17 @@
 
     {{-- Sidebar Footer --}}
     <div class="absolute bottom-0 left-0 right-0 p-4 border-t border-gray-200 bg-white">
-        <div class="flex items-center space-x-3 px-4 py-3 bg-gradient-to-r from-[#52a08a]/5 to-[#578E7E]/5 rounded-lg">
-            <div
-                class="w-10 h-10 bg-gradient-to-br from-[#52a08a] to-[#578E7E] rounded-full flex items-center justify-center">
-                <span class="text-white font-semibold text-sm">A</span>
-            </div>
-            <div class="flex-1">
-                <p class="text-sm font-medium text-[#23272F]">Admin User</p>
-                <p class="text-xs text-gray-500">admin@djingga.com</p>
-            </div>
-            <form action="{{ route('logout') }}" method="POST">
-                @csrf
-                <button type="submit" class="p-2 hover:bg-gray-100 rounded-lg transition-colors" aria-label="Logout">
-                    <svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
-                    </svg>
-                </button>
-            </form>
-        </div>
+        <form action="{{ route('logout') }}" method="POST">
+            @csrf
+            <button type="submit"
+                class="w-full flex items-center justify-center space-x-3 px-4 py-3 bg-gradient-to-r from-[#52a08a] to-[#578E7E] text-white font-medium rounded-lg hover:opacity-95 transition-colors"
+                aria-label="Logout">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                </svg>
+                <span>Logout</span>
+            </button>
+        </form>
     </div>
 </aside>

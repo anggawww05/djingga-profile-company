@@ -5,11 +5,12 @@
     <section id="cover" class="relative bg-gradient-to-br from-[#578E7E] to-[#23272F] py-20 overflow-hidden mt-5">
         <div class="max-w-6xl mx-auto px-6 md:px-12 text-center relative z-10">
             <h1 class="text-4xl md:text-5xl font-bold text-white mb-4">
-                Consultation Services
+                Profil Perusahaan
             </h1>
             <div class="w-20 h-1 bg-[#52a08a] rounded mx-auto mb-6"></div>
             <p class="text-lg text-white/90 max-w-2xl mx-auto">
-                Dapatkan konsultasi ahli dari tim profesional kami untuk mengembangkan bisnis dan solusi teknologi yang tepat sasaran.
+                Djingga Company adalah penyedia solusi teknologi informasi terkemuka yang berfokus pada inovasi, kualitas,
+                dan kepuasan pelanggan.
             </p>
         </div>
         <div class="absolute top-0 right-0 w-48 h-48 bg-[#52a08a]/10 rounded-full blur-3xl"></div>
@@ -241,7 +242,7 @@
                 </p>
             </div>
         </div>
-        <div class="absolute bottom-0 left-0 w-32 h-32 bg-[#52a08a]/10 rounded-full blur-2xl -z-10"></div>
-        <div class="absolute top-0 right-0 w-48 h-48 bg-[#578E7E]/10 rounded-full blur-3xl -z-10"></div>
+        {{-- <div class="absolute bottom-0 left-0 w-32 h-32 bg-[#52a08a]/10 rounded-full blur-2xl -z-10"></div>
+        <div class="absolute top-0 right-0 w-48 h-48 bg-[#578E7E]/10 rounded-full blur-3xl -z-10"></div> --}}
     </section>
 @endsection

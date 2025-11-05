@@ -15,7 +15,10 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->text('description');
-            $table->text('image');
+            $table->text('image_cover');
+            $table->date('activity_date')->nullable();
+            // create the column now; add the foreign key later in the category migration to avoid ordering issues
+            $table->unsignedBigInteger('category_activity_id')->nullable()->index();
             $table->timestamps();
         });
     }

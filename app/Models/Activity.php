@@ -11,7 +11,18 @@ class Activity extends Model
     protected $fillable = [
         'title',
         'description',
-        'image',
-        // 'status',
+        'image_cover',
+        'activity_date',
+        'category_activity_id',
     ];
+
+    public function categoryActivity()
+    {
+        return $this->belongsTo(CategoryActivity::class, 'category_activity_id');
+    }
+
+    public function galleryActivities()
+    {
+        return $this->hasMany(GalleryActivity::class);
+    }
 }

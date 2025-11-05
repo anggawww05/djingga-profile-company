@@ -9,13 +9,26 @@
                 <h1 class="text-2xl font-bold text-[#23272F]">Manage Projects</h1>
                 <p class="text-gray-600 mt-1">Kelola semua project yang telah dikerjakan</p>
             </div>
-            <a href="{{ route('manage-activity.add')}}"
-                class="bg-[#52a08a] hover:bg-[#466e62] text-white font-semibold py-2 px-6 rounded-lg shadow-lg transition-all duration-200 flex items-center gap-2">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
-                </svg>
-                Add Activity
-            </a>
+
+            @if ($activities->count() > 0)
+                <div class="flex items-center gap-3">
+                    <div class="flex items-center gap-4">
+                        <form action="{{ route('manage-activity.search') }}" method="GET" class="flex items-center">
+                            <input type="text" name="q" value="{{ request('q') }}" placeholder="Cari activity..."
+                                class="px-3 py-2 border border-gray-300 rounded-l-md focus:outline-none" />
+                            <button type="submit" class="px-3 py-2 bg-[#52a08a] text-white rounded-r-md">Cari</button>
+                        </form>
+
+                        <a href="{{ route('manage-activity.add') }}"
+                            class="bg-[#52a08a] hover:bg-[#466e62] text-white font-semibold py-2 px-6 rounded-lg shadow-lg transition-all duration-200 flex items-center gap-2">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+                            </svg>
+                            Add Activity
+                        </a>
+                    </div>
+                </div>
+            @endif
         </div>
     </div>
 
@@ -80,7 +93,8 @@
                                         class="inline-flex items-center px-3 py-1.5 bg-[#52a08a] hover:bg-[#466e62] text-white text-sm font-medium rounded-lg transition-colors duration-200">
                                         Edit
                                     </a>
-                                    <form action="{{ route('manage-activity.destroy', $activity->id) }}" method="POST" onsubmit="return confirm('Yakin ingin menghapus activity ini? Tindakan ini tidak bisa dibatalkan.');">
+                                    <form action="{{ route('manage-activity.destroy', $activity->id) }}" method="POST"
+                                        onsubmit="return confirm('Yakin ingin menghapus activity ini? Tindakan ini tidak bisa dibatalkan.');">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit"

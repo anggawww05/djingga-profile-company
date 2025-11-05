@@ -18,7 +18,8 @@ class PageController extends Controller
 
     public function indexProject()
     {
-        $projects = \App\Models\Project::orderBy('created_at', 'desc')->paginate(10);
+        // Show 6 random projects on the project grid (landing view)
+        $projects = \App\Models\Project::inRandomOrder()->limit(6)->get();
         return view('user.project.project', compact('projects'));
     }
 
@@ -36,8 +37,8 @@ class PageController extends Controller
         if (request()->has('search') && request('search') != '') {
             $searchTerm = request('search');
             $query->where(function ($q) use ($searchTerm) {
-            $q->where('title', 'like', '%' . $searchTerm . '%')
-                ->orWhere('description', 'like', '%' . $searchTerm . '%');
+                $q->where('title', 'like', '%' . $searchTerm . '%')
+                    ->orWhere('description', 'like', '%' . $searchTerm . '%');
             });
         }
 
@@ -47,14 +48,33 @@ class PageController extends Controller
 
     public function indexActivity()
     {
-        $activities = \App\Models\Activity::orderBy('created_at', 'desc')->paginate(10);
+        // Show 6 random activities on the landing activity grid
+        $activities = \App\Models\Activity::inRandomOrder()->limit(6)->get();
         return view('user.activity.activity', compact('activities'));
     }
 
     public function indexDetailActivity()
     {
-        $activity = \App\Models\Activity::findOrFail(request()->route('id'));
+        $activity = \App\Models\Activity::with(['categoryActivity', 'galleryActivities'])
+            ->findOrFail(request()->route('id'));
         return view('user.activity.detail-activity', compact('activity'));
+    }
+
+    public function indexFullActivity()
+    {
+        $query = \App\Models\Activity::orderBy('created_at', 'desc');
+
+        // allow searching by title or description using ?search=keyword
+        if (request()->has('search') && request('search') != '') {
+            $searchTerm = request('search');
+            $query->where(function ($q) use ($searchTerm) {
+                $q->where('title', 'like', '%' . $searchTerm . '%')
+                  ->orWhere('description', 'like', '%' . $searchTerm . '%');
+            });
+        }
+
+        $activities = $query->paginate(12)->withQueryString();
+        return view('user.activity.full-activity', compact('activities'));
     }
 
     public function indexConsultation()
@@ -67,6 +87,18 @@ class PageController extends Controller
 
     public function indexDashboard()
     {
-        return view('admin.dashboard.dashboard');
+        // Provide simple counts for dashboard overview
+        $projectsCount = \App\Models\Project::count();
+        $activitiesCount = \App\Models\Activity::count();
+        $servicesCount = \App\Models\Service::count();
+
+        return view(
+            'admin.dashboard.dashboard',
+            compact(
+                'projectsCount',
+                'activitiesCount',
+                'servicesCount',
+            )
+        );
     }
 }

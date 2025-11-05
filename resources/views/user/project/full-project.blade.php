@@ -1,7 +1,6 @@
 @extends('user.main')
 
 @section('container')
-    {{-- Hero Section with Search --}}
     <section id="cover" class="relative min-h-[400px] flex items-center justify-center bg-gradient-to-br from-[#52a08a] via-[#578E7E] to-[#23272F] overflow-hidden">
         <div class="absolute inset-0 bg-[url('/assets/pattern.svg')] opacity-5"></div>
         <div class="absolute top-0 left-0 w-64 h-64 bg-white/5 rounded-full blur-3xl"></div>
@@ -15,8 +14,7 @@
                 Discover our portfolio of innovative solutions and successful implementations
             </p>
 
-            {{-- Search Form --}}
-            <form action="{{ route('project') }}" method="GET" class="max-w-2xl mx-auto">
+            <form action="{{ route('project.full') }}" method="GET" class="max-w-2xl mx-auto">
                 <div class="relative">
                     <input
                         type="text"
@@ -36,11 +34,9 @@
         </div>
     </section>
 
-    {{-- Projects Grid Section --}}
     <section class="py-20 bg-gradient-to-br from-[#f8fafc] to-[#e6f4f1] relative">
         <div class="max-w-7xl mx-auto px-6 md:px-12">
-            {{-- Search Results Info --}}
-            @if (request('search'))
+            {{-- @if (request('search'))
                 <div class="mb-8 text-center">
                     <p class="text-gray-600">
                         Menampilkan hasil pencarian untuk: <span
@@ -48,7 +44,7 @@
                         <a href="{{ route('project') }}" class="ml-2 text-sm text-gray-500 hover:text-[#52a08a]">(Reset)</a>
                     </p>
                 </div>
-            @endif
+            @endif --}}
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 @forelse($projects as $project)
@@ -67,18 +63,9 @@
                                             <path d="M3 3h18v18H3V3zm16 16V5H5v14h14z" />
                                             <path d="M7 7h10v2H7V7zm0 4h10v2H7v-2zm0 4h7v2H7v-2z" />
                                         </svg>
-                                        {{-- <p class="text-sm opacity-90">{{ $project->type ?? 'Project' }}</p> --}}
                                     @endif
                                 </div>
                             </div>
-
-                            {{-- @if (!empty($project->type))
-                                <div class="absolute top-4 right-4">
-                                    <span class="bg-white/90 text-[#52a08a] px-3 py-1 rounded-full text-xs font-semibold">
-                                        {{ $project->type }}
-                                    </span>
-                                </div>
-                            @endif --}}
                         </div>
 
                         <div class="p-6">
@@ -86,7 +73,7 @@
                                 {{ $project->title }}
                             </h3>
 
-                            <p class="text-gray-600 text-sm leading-relaxed mb-4">
+                            <p class="text-gray-600 text-sm leading-relaxed mb-4 text-justify">
                                 {{ \Illuminate\Support\Str::limit($project->description ?? ($project->excerpt ?? '-'), 140) }}
                             </p>
 
@@ -130,31 +117,12 @@
             {{-- Pagination --}}
             @if ($projects->hasPages())
                 <div class="mt-12">
-                    {{ $projects->links() }}
+                    {{ $projects->links('pagination::tailwind') }}
                 </div>
             @endif
         </div>
 
-        <div class="absolute top-0 left-0 w-32 h-32 bg-[#52a08a]/10 rounded-full blur-2xl -z-10"></div>
-        <div class="absolute bottom-0 right-0 w-48 h-48 bg-[#578E7E]/10 rounded-full blur-3xl -z-10"></div>
-    </section>
-
-    {{-- Call to Action --}}
-    <section class="py-16 bg-gradient-to-br from-[#578E7E] to-[#23272F] relative">
-        <div class="max-w-6xl mx-auto px-6 md:px-12 text-center">
-            <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">
-                Punya Project dalam Pikiran?
-            </h2>
-            <p class="text-lg text-white/90 mb-8 max-w-2xl mx-auto">
-                Mari diskusikan project impian Anda bersama tim ahli kami. Kami siap mewujudkan ide kreatif menjadi solusi
-                digital yang powerful.
-            </p>
-            <a href="{{ route('consultation') }}"
-                class="inline-block bg-[#52a08a] hover:bg-[#466e62] text-white font-semibold py-3 px-10 rounded-full shadow-xl transition-all duration-200 text-lg">
-                Start Your Project
-            </a>
-        </div>
-        <div class="absolute top-0 left-0 w-32 h-32 bg-white/10 rounded-full blur-2xl"></div>
-        <div class="absolute bottom-0 right-0 w-48 h-48 bg-[#52a08a]/10 rounded-full blur-3xl"></div>
+        {{-- <div class="absolute top-0 left-0 w-32 h-32 bg-[#52a08a]/10 rounded-full blur-2xl -z-10"></div>
+        <div class="absolute bottom-0 right-0 w-48 h-48 bg-[#578E7E]/10 rounded-full blur-3xl -z-10"></div> --}}
     </section>
 @endsection

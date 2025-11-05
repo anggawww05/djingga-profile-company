@@ -46,7 +46,21 @@ class ConsultationController extends Controller
     //admin
     public function manageConsultation()
     {
-        $consultations = \App\Models\Consultation::orderBy('created_at', 'desc')->paginate(10);
+        $query = \App\Models\Consultation::query();
+
+        // Filter by search query if exists
+        if ($search = request('q')) {
+            $query->where(function ($q) use ($search) {
+                $q->where('name', 'like', "%{$search}%")
+                    ->orWhere('email', 'like', "%{$search}%")
+                    ->orWhere('phone', 'like', "%{$search}%")
+                    ->orWhere('company', 'like', "%{$search}%")
+                    ->orWhere('service', 'like', "%{$search}%")
+                    ->orWhere('description', 'like', "%{$search}%");
+            });
+        }
+
+        $consultations = $query->orderBy('created_at', 'desc')->paginate(10);
 
         // Ambil data service (semua service; ubah ->pluck('service_name','id') jika hanya butuh id => name)
         $services = \App\Models\Service::orderBy('service_name')->get();

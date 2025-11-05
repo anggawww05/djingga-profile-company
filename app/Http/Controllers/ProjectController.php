@@ -6,10 +6,22 @@ use Illuminate\Http\Request;
 
 class ProjectController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        // ambil data project (terbaru dulu) dan paginasi
-        $projects = \App\Models\Project::orderBy('created_at', 'desc')->paginate(10);
+        // ambil data project (terbaru dulu) dan paginasi, dengan opsi pencarian (parameter `q`)
+        $query = \App\Models\Project::query();
+
+        if ($search = $request->input('q')) {
+            $query->where(function ($q) use ($search) {
+                $q->where('title', 'like', "%{$search}%")
+                  ->orWhere('description', 'like', "%{$search}%")
+                  ->orWhere('link', 'like', "%{$search}%");
+            });
+        }
+
+        $projects = $query->orderBy('created_at', 'desc')
+                          ->paginate(10)
+                          ->appends($request->only('q'));
 
         return view('admin.project.manage-project', compact('projects'));
     }
