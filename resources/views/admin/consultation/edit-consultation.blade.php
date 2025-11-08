@@ -82,13 +82,22 @@
                 </div>
 
                 <div class="mt-6">
+                    <label class="block text-sm font-semibold text-[#23272F] mb-2">Status</label>
+                    <select name="status" class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:border-[#52a08a] transition-colors">
+                        <option value="pending" @selected(old('status', 'pending') == 'pending')>Belum Selesai</option>
+                        <option value="done" @selected(old('status') == 'done')>Selesai</option>
+                    </select>
+                    @error('status')<p class="mt-1 text-sm text-red-600">{{ $message }}</p>@enderror
+                </div>
+
+                <div class="mt-6">
                     <label class="block text-sm font-semibold text-[#23272F] mb-2">Deskripsi Kebutuhan</label>
                     <textarea name="description" rows="4" class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:border-[#52a08a] transition-colors" placeholder="Jelaskan kebutuhan dan tantangan yang dihadapi...">{{ old('description', $consultation->description) }}</textarea>
                 </div>
 
                 <div class="flex items-center justify-end gap-4 pt-6 border-t border-gray-200 mt-8">
-                    <a href="{{ route('manage-consultation') }}" class="px-6 py-2.5 border border-gray-300 text-gray-700 font-semibold rounded-lg hover:bg-gray-50 transition-all duration-200">Batal</a>
-                    <button type="submit" class="px-6 py-2.5 bg-[#52a08a] hover:bg-[#466e62] text-white font-semibold rounded-lg shadow-lg transition-all duration-200">Update</button>
+                    {{-- <a href="{{ route('manage-consultation') }}" class="px-6 py-2.5 border border-gray-300 text-gray-700 font-semibold rounded-lg hover:bg-gray-50 transition-all duration-200">Batal</a> --}}
+                    <button type="submit" class="px-6 py-2.5 bg-[#52a08a] hover:bg-[#466e62] text-white font-semibold rounded-lg shadow-lg transition-all duration-200">Simpan</button>
                 </div>
             </form>
         </div>

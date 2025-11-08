@@ -25,11 +25,11 @@
         <div class="flex items-center space-x-3">
             <div
                 class="w-8 h-8 bg-gradient-to-br from-[#52a08a] to-[#578E7E] rounded-full flex items-center justify-center">
-                <span class="text-white font-semibold text-sm">A</span>
+                <span class="text-white font-semibold text-sm">S</span>
             </div>
             <div class="hidden md:block text-left">
-                <p class="text-sm font-medium text-[#23272F]">Admin User</p>
-                <p class="text-xs text-gray-500">Super Admin</p>
+                {{-- <p class="text-sm font-medium text-[#23272F]">Admin User</p> --}}
+                <p class="text-sm font-medium text-[#23272F]">Super Admin</p>
             </div>
         </div>
 

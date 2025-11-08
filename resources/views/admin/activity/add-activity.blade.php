@@ -11,8 +11,8 @@
                 </svg>
             </a>
             <div>
-                <h1 class="text-2xl font-bold text-[#23272F]">Tambah Activity Baru</h1>
-                <p class="text-gray-600 mt-1">Isi form di bawah untuk menambahkan activity baru</p>
+                <h1 class="text-2xl font-bold text-[#23272F]">Tambah Akivitas</h1>
+                <p class="text-gray-600 mt-1">Isi form di bawah untuk menambahkan aktivitas baru</p>
             </div>
         </div>
     </div>
@@ -47,11 +47,11 @@
                 {{-- Title Field --}}
                 <div class="mb-6">
                     <label for="title" class="block text-sm font-semibold text-[#23272F] mb-2">
-                        Judul <span class="text-red-500">*</span>
+                        Judul
                     </label>
                     <input type="text" id="title" name="title" value="{{ old('title') }}" required
                         class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#52a08a] focus:border-transparent transition-all duration-200"
-                        placeholder="Judul activity">
+                        placeholder="Input judul aktivitas...">
                     @error('title')
                         <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                     @enderror
@@ -64,11 +64,10 @@
                     </label>
                     <textarea id="description" name="description" rows="5"
                         class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#52a08a] focus:border-transparent transition-all duration-200 resize-none"
-                        placeholder="Jelaskan activity...">{{ old('description') }}</textarea>
+                        placeholder="Input deskripsi aktivitas...">{{ old('description') }}</textarea>
                     @error('description')
                         <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                     @enderror
-                    <p class="mt-1 text-xs text-gray-500">Deskripsi singkat tentang activity</p>
                 </div>
 
                 {{-- Image Upload Field --}}
@@ -101,7 +100,7 @@
                 {{-- Activity Date & Category --}}
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                     <div>
-                        <label for="activity_date" class="block text-sm font-semibold text-[#23272F] mb-2">Tanggal Kegiatan <span class="text-red-500">*</span></label>
+                        <label for="activity_date" class="block text-sm font-semibold text-[#23272F] mb-2">Tanggal Kegiatan</label>
                         <input type="date" id="activity_date" name="activity_date" value="{{ old('activity_date') }}" required
                             class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#52a08a] focus:border-transparent transition-all duration-200">
                         @error('activity_date')
@@ -152,16 +151,16 @@
 
                 {{-- Action Buttons --}}
                 <div class="flex items-center justify-end gap-4 pt-6 border-t border-gray-200">
-                    <a href="{{ route('manage-activity') }}"
+                    {{-- <a href="{{ route('manage-activity') }}"
                         class="px-6 py-2.5 border border-gray-300 text-gray-700 font-semibold rounded-lg hover:bg-gray-50 transition-all duration-200">
                         Batal
-                    </a>
+                    </a> --}}
                     <button type="submit"
                         class="px-6 py-2.5 bg-[#52a08a] hover:bg-[#466e62] text-white font-semibold rounded-lg shadow-lg transition-all duration-200 flex items-center gap-2">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        {{-- <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M5 13l4 4L19 7" />
-                        </svg>
+                        </svg> --}}
                         Simpan
                     </button>
                 </div>

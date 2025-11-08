@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\Service;
 use Illuminate\Http\Request;
 
 class ConsultationController extends Controller
@@ -16,6 +16,7 @@ class ConsultationController extends Controller
             'company' => 'nullable|string|max:255',
             // The dropdown sends either a service id or a plain text value; we accept any string here
             'service' => 'nullable|string|max:255',
+            'status' => 'nullable|string|in:pending,done',
             'description' => 'nullable|string',
         ]);
 
@@ -36,6 +37,7 @@ class ConsultationController extends Controller
         } else {
             $consultation->service = $data['service'] ?? null;
         }
+        $consultation->status = $data['status'] ?? null;
         $consultation->description = $data['description'] ?? null;
 
         $consultation->save();
@@ -60,7 +62,14 @@ class ConsultationController extends Controller
             });
         }
 
-        $consultations = $query->orderBy('created_at', 'desc')->paginate(10);
+        // Filter by status if provided (migration defines 'pending' and 'done')
+        $status = request('status', null);
+        if (!is_null($status) && in_array($status, ['pending', 'done'])) {
+            $query->where('status', $status);
+        }
+
+        // Keep query string (search/status) when paginating
+        $consultations = $query->orderBy('created_at', 'desc')->paginate(10)->withQueryString();
 
         // Ambil data service (semua service; ubah ->pluck('service_name','id') jika hanya butuh id => name)
         $services = \App\Models\Service::orderBy('service_name')->get();
@@ -85,6 +94,7 @@ class ConsultationController extends Controller
             'company' => 'nullable|string|max:255',
             // The dropdown sends either a service id or a plain text value; we accept any string here
             'service' => 'nullable|string|max:255',
+            'status' => 'nullable|string|in:pending,done',
             'description' => 'nullable|string',
         ]);
 
@@ -106,6 +116,7 @@ class ConsultationController extends Controller
             $consultation->service = $data['service'] ?? null;
         }
         $consultation->description = $data['description'] ?? null;
+        $consultation->status = $data['status'] ?? null;
 
         $consultation->save();
 
@@ -136,6 +147,7 @@ class ConsultationController extends Controller
             'company' => 'nullable|string|max:255',
             // The dropdown sends either a service id or a plain text value; we accept any string here
             'service' => 'nullable|string|max:255',
+            'status' => 'nullable|string|in:pending,done',
             'description' => 'nullable|string',
         ]);
 
@@ -153,7 +165,7 @@ class ConsultationController extends Controller
         } else {
             $consultation->service = $data['service'] ?? null;
         }
-
+        $consultation->status = $data['status'] ?? null;
         $consultation->description = $data['description'] ?? null;
 
         $consultation->save();
@@ -167,5 +179,24 @@ class ConsultationController extends Controller
         $consultation->delete();
 
         return redirect()->route('manage-consultation')->with('success', 'Permintaan konsultasi berhasil dihapus.');
+    }
+
+    public function storeService(Request $request)
+    {
+        $data = $request->validate([
+            'service_name' => 'required|string|max:191',
+        ]);
+
+        Service::create($data);
+
+        return redirect()->route('manage-consultation')->with('success', 'Layanan berhasil ditambahkan.');
+    }
+
+    public function destroyService($id)
+    {
+        $service = Service::findOrFail($id);
+        $service->delete();
+
+        return redirect()->route('manage-consultation')->with('success', 'Kategori berhasil dihapus.');
     }
 }

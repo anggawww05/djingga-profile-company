@@ -90,15 +90,20 @@ class PageController extends Controller
         // Provide simple counts for dashboard overview
         $projectsCount = \App\Models\Project::count();
         $activitiesCount = \App\Models\Activity::count();
-        $servicesCount = \App\Models\Service::count();
+        $servicesCount = \App\Models\Consultation::count();
 
-        return view(
-            'admin.dashboard.dashboard',
-            compact(
-                'projectsCount',
-                'activitiesCount',
-                'servicesCount',
-            )
-        );
+        // Fetch recent items to show in small dashboard tables (controller provides data)
+        $recentProjects = \App\Models\Project::latest()->take(5)->get();
+        $recentActivities = \App\Models\Activity::latest()->take(5)->get();
+        $recentConsultations = \App\Models\Consultation::latest()->take(5)->get();
+
+        return view('admin.dashboard.dashboard', compact(
+            'projectsCount',
+            'activitiesCount',
+            'servicesCount',
+            'recentProjects',
+            'recentActivities',
+            'recentConsultations'
+        ));
     }
 }

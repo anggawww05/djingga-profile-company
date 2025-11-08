@@ -11,36 +11,110 @@
                 </svg>
             </a>
             <div>
-                <h1 class="text-2xl font-bold text-[#23272F]">Detail Activity</h1>
-                <p class="text-gray-600 mt-1">Informasi lengkap activity</p>
+                <h1 class="text-2xl font-bold text-[#23272F]">Detail Aktivitas</h1>
+                <p class="text-gray-600 mt-1">Informasi lengkap aktivitas</p>
             </div>
         </div>
     </div>
 
+    {{-- Detail Card (styled like the form) --}}
     <div class="bg-white rounded-3xl shadow-lg border border-[#52a08a]/10 overflow-hidden">
         <div class="p-8">
-            {{-- Title --}}
+            {{-- Title Field --}}
             <div class="mb-6">
-                <label class="block text-sm font-semibold text-[#23272F] mb-2">Judul</label>
-                <p class="text-gray-700">{{ $activity->title }}</p>
+                <label for="title" class="block text-sm font-semibold text-[#23272F] mb-2">
+                    Judul
+                </label>
+                <input type="text" id="title" name="title" value="{{ $activity->title }}" disabled
+                    class="w-full px-4 py-3 border border-gray-300 rounded-lg bg-gray-50 text-gray-700 cursor-not-allowed"
+                    placeholder="Judul aktivitas...">
             </div>
 
-            {{-- Description --}}
+            {{-- Description Field --}}
             <div class="mb-6">
-                <label class="block text-sm font-semibold text-[#23272F] mb-2">Deskripsi</label>
-                <p class="text-gray-700 whitespace-pre-line">{{ $activity->description }}</p>
+                <label for="description" class="block text-sm font-semibold text-[#23272F] mb-2">
+                    Deskripsi
+                </label>
+                <textarea id="description" name="description" rows="5" disabled
+                    class="w-full px-4 py-3 border border-gray-300 rounded-lg bg-gray-50 text-gray-700 cursor-not-allowed resize-none"
+                    placeholder="Deskripsi aktivitas...">{{ $activity->description }}</textarea>
             </div>
 
-            {{-- Image --}}
+            {{-- Cover Image (preview only) --}}
             <div class="mb-8">
-                <label class="block text-sm font-semibold text-[#23272F] mb-2">Gambar</label>
-                @if ($activity->image)
-                    <img src="{{ asset('storage/' . $activity->image) }}" alt="{{ $activity->title }}"
-                        class="w-full max-h-96 object-contain rounded-lg bg-gray-50 p-4 border">
+                <label for="image" class="block text-sm font-semibold text-[#23272F] mb-2">
+                    Gambar
+                </label>
+                @if (!empty($activity->image_cover))
+                    <div class="w-full h-48 rounded-lg overflow-hidden border border-gray-200 bg-gray-50 p-4 flex items-center justify-center">
+                        <img src="{{ asset('storage/' . ltrim($activity->image_cover, '/')) }}" alt="{{ $activity->title }}" class="w-full h-full object-contain">
+                    </div>
                 @else
                     <div class="w-full h-48 flex items-center justify-center border-2 border-dashed border-gray-300 rounded-lg bg-gray-50 text-gray-500">
                         Tidak ada gambar
                     </div>
+                @endif
+            </div>
+
+            {{-- Activity Date & Category --}}
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                <div>
+                    <label for="activity_date" class="block text-sm font-semibold text-[#23272F] mb-2">Tanggal Kegiatan</label>
+                    <input type="date" id="activity_date" name="activity_date" value="{{ optional($activity->activity_date)->format('Y-m-d') ?? ($activity->activity_date ?? '') }}" disabled
+                        class="w-full px-4 py-3 border border-gray-300 rounded-lg bg-gray-50 text-gray-700 cursor-not-allowed">
+                </div>
+
+                <div>
+                    <label for="category_activity_id" class="block text-sm font-semibold text-[#23272F] mb-2">Kategori</label>
+                    <input type="text" value="{{ optional($activity->category)->category_name ?? optional($activity->categoryActivity)->category_name ?? ($activity->category_name ?? '—') }}" disabled
+                        class="w-full px-4 py-3 border border-gray-300 rounded-lg bg-gray-50 text-gray-700 cursor-not-allowed">
+                </div>
+            </div>
+
+            {{-- Gallery Images Preview --}}
+            <div class="mb-8">
+                <label class="block text-sm font-semibold text-[#23272F] mb-2">Gallery Gambar</label>
+
+                @php
+                    // Build gallery items from relation `galleryActivities` first, fallback to a stored 'gallery' attribute if present.
+                    $galleryItems = [];
+
+                    if (!empty($activity->galleryActivities) && $activity->galleryActivities->count() > 0) {
+                        foreach ($activity->galleryActivities as $g) {
+                            if (!empty($g->image)) $galleryItems[] = $g->image;
+                        }
+                    } elseif (!empty($activity->gallery)) {
+                        // support gallery stored as JSON string or comma-separated
+                        if (is_string($activity->gallery)) {
+                            $decoded = json_decode($activity->gallery, true);
+                            if (is_array($decoded)) {
+                                $galleryItems = $decoded;
+                            } else {
+                                // try comma separated
+                                $parts = array_filter(array_map('trim', explode(',', $activity->gallery)));
+                                if (!empty($parts)) $galleryItems = $parts;
+                                else $galleryItems = [$activity->gallery];
+                            }
+                        } elseif (is_array($activity->gallery)) {
+                            $galleryItems = $activity->gallery;
+                        }
+                    }
+                @endphp
+
+                @if(!empty($galleryItems))
+                    <div id="gallery-preview" class="mt-4 flex flex-wrap gap-3">
+                        @foreach($galleryItems as $g)
+                            <div class="w-24 h-24 bg-gray-50 rounded-lg overflow-hidden flex items-center justify-center border border-gray-200">
+                                @if($g)
+                                    <img src="{{ asset('storage/' . ltrim($g, '/')) }}" alt="gallery" class="w-full h-full object-cover">
+                                @else
+                                    <div class="text-xs text-gray-400">invalid</div>
+                                @endif
+                            </div>
+                        @endforeach
+                    </div>
+                @else
+                    <div class="mt-2 text-sm text-gray-500">Tidak ada gambar gallery</div>
                 @endif
             </div>
 
@@ -50,27 +124,6 @@
                 @if($activity->updated_at && $activity->updated_at != $activity->created_at)
                     <div>Terakhir diubah: {{ $activity->updated_at->format('d M Y H:i') }}</div>
                 @endif
-            </div>
-
-            <div class="flex items-center justify-end gap-4 pt-6 border-t border-gray-200">
-                <a href="{{ route('manage-activity') }}"
-                    class="px-6 py-2.5 border border-gray-300 text-gray-700 font-semibold rounded-lg hover:bg-gray-50 transition-all duration-200">
-                    Kembali
-                </a>
-
-                <a href="{{ route('manage-activity.edit', $activity) }}"
-                    class="px-6 py-2.5 bg-[#f59e0b] hover:bg-[#d97706] text-white font-semibold rounded-lg transition-all duration-200">
-                    Edit
-                </a>
-
-                <form action="{{ route('manage-activity.destroy', $activity) }}" method="POST" onsubmit="return confirm('Hapus activity ini?')">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit"
-                        class="px-6 py-2.5 bg-red-600 hover:bg-red-700 text-white font-semibold rounded-lg transition-all duration-200">
-                        Hapus
-                    </button>
-                </form>
             </div>
         </div>
     </div>

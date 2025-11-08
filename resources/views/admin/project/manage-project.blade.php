@@ -6,7 +6,7 @@
     <div class="mb-6">
         <div class="flex items-center justify-between">
             <div>
-                <h1 class="text-2xl font-bold text-[#23272F]">Manage Projects</h1>
+                <h1 class="text-2xl font-bold text-[#23272F]">Kelola Project</h1>
                 <p class="text-gray-600 mt-1">Kelola semua project yang telah dikerjakan</p>
             </div>
             @if ($projects->count() > 0)
@@ -53,19 +53,19 @@
                             No
                         </th>
                         <th class="px-6 py-4 text-left text-xs font-semibold text-[#23272F] uppercase tracking-wider">
-                            Title
+                            Judul
                         </th>
                         <th class="px-6 py-4 text-left text-xs font-semibold text-[#23272F] uppercase tracking-wider">
-                            Description
+                            Deskripsi
                         </th>
                         <th class="px-6 py-4 text-left text-xs font-semibold text-[#23272F] uppercase tracking-wider">
                             Link
                         </th>
                         <th class="px-6 py-4 text-left text-xs font-semibold text-[#23272F] uppercase tracking-wider">
-                            Image
+                            Gambar
                         </th>
                         <th class="px-6 py-4 text-center text-xs font-semibold text-[#23272F] uppercase tracking-wider">
-                            Actions
+                            Aksi
                         </th>
                     </tr>
                 </thead>
@@ -85,7 +85,7 @@
                                 @if ($project->link)
                                     <a href="{{ $project->link }}" target="_blank"
                                         class="text-[#52a08a] hover:text-[#466e62] font-medium hover:underline">
-                                        Visit Project
+                                        Kunjungi Project
                                     </a>
                                 @else
                                     <span class="text-gray-400">-</span>
@@ -111,18 +111,12 @@
                                     {{-- Detail Button --}}
                                     <a href="{{ route('manage-project.detail', $project->id) }}"
                                         class="inline-flex items-center px-3 py-1.5 bg-blue-500 hover:bg-blue-600 text-white text-sm font-medium rounded-lg transition-colors duration-200">
-                                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M2.458 12C3.732 7.943 7.523 5 12 5s8.268 2.943 9.542 7c-1.274 4.057-5.065 7-9.542 7S3.732 16.057 2.458 12z" />
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                                        </svg>
                                         Detail
                                     </a>
 
                                     {{-- Edit Button --}}
                                     <a href="{{ route('manage-project.edit', $project->id) }}"
-                                        class="inline-flex items-center px-3 py-1.5 bg-[#52a08a] hover:bg-[#466e62] text-white text-sm font-medium rounded-lg transition-colors duration-200">
+                                        class="inline-flex items-center px-3 py-1.5 bg-yellow-500 hover:bg-yellow-600 text-white text-sm font-medium rounded-lg transition-colors duration-200">
                                         Edit
                                     </a>
 
@@ -133,7 +127,7 @@
                                         @method('DELETE')
                                         <button type="submit"
                                             class="inline-flex items-center px-3 py-1.5 bg-red-500 hover:bg-red-600 text-white text-sm font-medium rounded-lg transition-colors duration-200">
-                                            Delete
+                                            Hapus
                                         </button>
                                     </form>
                                 </div>

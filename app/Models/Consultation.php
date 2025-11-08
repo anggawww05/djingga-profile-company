@@ -14,6 +14,7 @@ class Consultation extends Model
         'phone',
         'company',
         'service',
+        'status',
         'description',
     ];
 

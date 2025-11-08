@@ -48,6 +48,9 @@ Route::get('/manage-activity/edit/{id}', [\App\Http\Controllers\ActivityControll
 Route::put('/manage-activity/edit/{id}', [\App\Http\Controllers\ActivityController::class, 'updateActivity'])->name('manage-activity.update');
 Route::delete('/manage-activity/delete/{id}', [\App\Http\Controllers\ActivityController::class, 'destroyActivity'])->name('manage-activity.destroy');
 
+Route::post('/manage-activity/category/add', [\App\Http\Controllers\ActivityController::class, 'categoryStore'])->name('manage-activity.category.store');
+Route::delete('/manage-activity/category/{id}', [\App\Http\Controllers\ActivityController::class, 'categoryDestroy'])->name('manage-activity.category.destroy');
+
 Route::get('/manage-consultation', [ConsultationController::class, 'manageConsultation'])->name('manage-consultation');
 Route::post('/manage-consultation', [ConsultationController::class, 'manageConsultation'])->name('manage-consultation.search');
 Route::get('/manage-consultation/add', [ConsultationController::class, 'showAddConsultationForm'])->name('manage-consultation.add');
@@ -56,6 +59,8 @@ Route::get('/manage-consultation/detail/{id}', [ConsultationController::class, '
 Route::get('/manage-consultation/edit/{id}', [ConsultationController::class, 'showEditConsultationForm'])->name('manage-consultation.edit');
 Route::post('/manage-consultation/edit/{id}', [ConsultationController::class, 'editConsultation'])->name('manage-consultation.update');
 Route::delete('/manage-consultation/delete/{id}', [ConsultationController::class, 'deleteConsultation'])->name('manage-consultation.delete');
+Route::post('/manage-consultation/service/add', [ConsultationController::class, 'storeService'])->name('manage-consultation.service.store');
+Route::delete('/manage-consultation/service/{id}', [ConsultationController::class, 'destroyService'])->name('manage-consultation.service.destroy');
 // Admin Project Management Routes
 
 // Route::get('/', [ProjectController::class, 'index'])->name('index');

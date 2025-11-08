@@ -9,7 +9,7 @@
             </h1>
             <div class="w-20 h-1 bg-[#52a08a] rounded mx-auto mb-6"></div>
             <p class="text-lg text-white/90 max-w-2xl mx-auto">
-                Perusahaan kami terus berinovasi dan berkembang melalui berbagai aktivitas yang mencerminkan komitmen kami terhadap teknologi dan layanan berkualitas tinggi.
+                Jelajahi berbagai aktivitas dan inisiatif terbaru dari perusahaan kami yang mencerminkan komitmen kami terhadap inovasi dan kualitas.
             </p>
         </div>
         <div class="absolute top-0 right-0 w-48 h-48 bg-[#52a08a]/10 rounded-full blur-3xl"></div>
@@ -46,7 +46,7 @@
                                 {{ $activity->title }}
                             </h3>
                             <p class="text-gray-600 text-sm leading-relaxed mb-4 text-justify">
-                                {{ \Illuminate\Support\Str::limit($activity->description ?? ($activity->excerpt ?? '-'), 140) }}
+                                {{ \Illuminate\Support\Str::limit($activity->description ?? ($activity->excerpt ?? '-'), 40) }}
                             </p>
                             <a href="{{ route('activity.detail', $activity->id) }}"
                                 class="text-[#52a08a] hover:text-[#466e62] font-semibold text-sm flex items-center gap-1">

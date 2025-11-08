@@ -12,7 +12,7 @@
             </a>
             <div>
                 <h1 class="text-2xl font-bold text-[#23272F]">Edit Project</h1>
-                <p class="text-gray-600 mt-1">Ubah data project pada form di bawah lalu simpan</p>
+                <p class="text-gray-600 mt-1">Ubah data project pada form berikut</p>
             </div>
         </div>
     </div>
@@ -41,7 +41,7 @@
                     <textarea id="description" name="description" rows="5"
                         class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#52a08a] focus:border-transparent transition-all duration-200 resize-none"
                         placeholder="Jelaskan detail project, fitur utama, teknologi yang digunakan, dll.">{{ $project->description }}</textarea>
-                    <p class="mt-1 text-xs text-gray-500">Deskripsi singkat tentang project Anda</p>
+
                 </div>
 
                 {{-- Link Field --}}
@@ -51,8 +51,8 @@
                     </label>
                     <input type="url" id="link" name="link" value="{{ $project->link }}"
                         class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#52a08a] focus:border-transparent transition-all duration-200"
-                        placeholder="https://example.com/project">
-                    <p class="mt-1 text-xs text-gray-500">URL website atau repository project</p>
+                        placeholder="Input link project...">
+
                 </div>
 
                 {{-- Image Upload Field --}}
@@ -80,25 +80,22 @@
                                 <p class="text-xs text-gray-500">PNG, JPG, JPEG hingga 2MB</p>
                             </div>
                         </label>
-                        @if ($project->image)
-                            <p class="mt-2 text-xs text-gray-500">Gambar saat ini: {{ basename($project->image) }}</p>
-                        @endif
                     </div>
                 </div>
 
                 {{-- Action Buttons --}}
                 <div class="flex items-center justify-end gap-4 pt-6 border-t border-gray-200">
-                    <a href="{{ route('manage-project') }}"
+                    {{-- <a href="{{ route('manage-project') }}"
                         class="px-6 py-2.5 border border-gray-300 text-gray-700 font-semibold rounded-lg hover:bg-gray-50 transition-all duration-200">
                         Batal
-                    </a>
+                    </a> --}}
                     <button type="submit"
                         class="px-6 py-2.5 bg-[#52a08a] hover:bg-[#466e62] text-white font-semibold rounded-lg shadow-lg transition-all duration-200 flex items-center gap-2">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        {{-- <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M5 13l4 4L19 7" />
-                        </svg>
-                        Update Project
+                        </svg> --}}
+                        Simpan
                     </button>
                 </div>
             </form>

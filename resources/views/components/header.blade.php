@@ -21,7 +21,7 @@
                 <a href="{{ route('profile') }}" class="nav-link {{ $isProfile ? 'active' : '' }} text-white transition-colors duration-300">Profil</a>
             </li>
             <li>
-                <a href="{{ route('project') }}" class="nav-link {{ $isProject ? 'active' : '' }} text-white transition-colors duration-300">Proyek</a>
+                <a href="{{ route('project') }}" class="nav-link {{ $isProject ? 'active' : '' }} text-white transition-colors duration-300">Project</a>
             </li>
             <li>
                 <a href="{{ route('activity') }}" class="nav-link {{ $isActivity ? 'active' : '' }} text-white transition-colors duration-300">Aktivitas</a>

@@ -4,12 +4,11 @@
     <section id="cover" class="relative bg-gradient-to-br from-[#578E7E] to-[#23272F] py-20 overflow-hidden mt-5">
         <div class="max-w-6xl mx-auto px-6 md:px-12 text-center relative z-10">
             <h1 class="text-4xl md:text-5xl font-bold text-white mb-4">
-                Proyek Kami
+                Project Kami
             </h1>
             <div class="w-20 h-1 bg-[#52a08a] rounded mx-auto mb-6"></div>
             <p class="text-lg text-white/90 max-w-2xl mx-auto">
-                Jelajahi berbagai proyek inovatif yang telah kami kerjakan untuk klien dari berbagai industri, menampilkan
-                keahlian dan dedikasi kami dalam memberikan solusi teknologi terbaik.
+                Jelajahi berbagai project inovatif yang telah kami kerjakan, mencerminkan komitmen kami terhadap kualitas dan solusi teknologi terkini.
             </p>
         </div>
         <div class="absolute top-0 right-0 w-48 h-48 bg-[#52a08a]/10 rounded-full blur-3xl"></div>
@@ -24,21 +23,18 @@
                     <div
                         class="group bg-white rounded-3xl shadow-xl overflow-hidden hover:-translate-y-2 transition-all duration-300 border border-[#52a08a]/10">
                         <div class="relative overflow-hidden">
-                            <div
-                                class="h-48 bg-gradient-to-br from-[#52a08a] to-[#578E7E] flex items-center justify-center">
-                                <div class="text-white text-center">
-                                    @if (!empty($project->image))
-                                        <img src="{{ asset('storage/' . $project->image) }}" alt="{{ $project->title }}"
-                                            class="object-cover w-full h-48" />
-                                    @else
-                                        <svg class="w-16 h-16 mx-auto mb-2 opacity-80" fill="currentColor"
-                                            viewBox="0 0 24 24">
+                            <div class="h-48 bg-gradient-to-br from-[#52a08a] to-[#578E7E] flex items-center justify-center">
+                                @if (!empty($project->image))
+                                    <img src="{{ asset('storage/' . $project->image) }}" alt="{{ $project->title }}"
+                                        class="object-cover w-full h-48" />
+                                @else
+                                    <div class="text-white text-center px-4">
+                                        <svg class="w-16 h-16 mx-auto mb-2 opacity-80" fill="currentColor" viewBox="0 0 24 24">
                                             <path d="M3 3h18v18H3V3zm16 16V5H5v14h14z" />
                                             <path d="M7 7h10v2H7V7zm0 4h10v2H7v-2zm0 4h7v2H7v-2z" />
                                         </svg>
-                                        {{-- <p class="text-sm opacity-90">{{ $project->type ?? 'Project' }}</p> --}}
-                                    @endif
-                                </div>
+                                    </div>
+                                @endif
                             </div>
                         </div>
 
@@ -48,7 +44,7 @@
                             </h3>
 
                             <p class="text-gray-600 text-sm leading-relaxed mb-4 text-justify">
-                                {{ \Illuminate\Support\Str::limit($project->description ?? ($project->excerpt ?? '-'), 140) }}
+                                {{ \Illuminate\Support\Str::limit($project->description ?? ($project->excerpt ?? '-'), 40) }}
                             </p>
 
                             <div class="flex items-center justify-between">
@@ -77,7 +73,7 @@
                 <div class="text-center mt-12">
                     <a href="{{ route('project.full') }}"
                         class="bg-[#52a08a] hover:bg-[#466e62] text-white font-semibold py-3 px-10 rounded-full shadow-xl transition-all duration-200 text-lg">
-                        Lebih Semua
+                        Lihat Semua
                     </a>
                 </div>
             @endif

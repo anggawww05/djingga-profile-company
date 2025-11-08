@@ -4,15 +4,14 @@
     <div class="mb-6">
         <div class="flex items-center gap-4">
             {{-- Back Button --}}
-            <a href="{{ route('manage-project') }}"
-                class="p-2 hover:bg-gray-100 rounded-lg transition-colors">
+            <a href="{{ route('manage-project') }}" class="p-2 hover:bg-gray-100 rounded-lg transition-colors">
                 <svg class="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
                 </svg>
             </a>
             <div>
-                <h1 class="text-2xl font-bold text-[#23272F]">Tambah Project Baru</h1>
-                <p class="text-gray-600 mt-1">Isi form di bawah untuk menambahkan project baru</p>
+                <h1 class="text-2xl font-bold text-[#23272F]">Tambah Project</h1>
+                <p class="text-gray-600 mt-1">Isi form berikut untuk menambahkan project baru</p>
             </div>
         </div>
     </div>
@@ -51,7 +50,7 @@
                     </label>
                     <input type="text" id="title" name="title" value="{{ old('title') }}" required
                         class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#52a08a] focus:border-transparent transition-all duration-200"
-                        placeholder="Contoh: Website E-commerce Fashion">
+                        placeholder="Input judul project...">
                     @error('title')
                         <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                     @enderror
@@ -64,11 +63,10 @@
                     </label>
                     <textarea id="description" name="description" rows="5"
                         class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#52a08a] focus:border-transparent transition-all duration-200 resize-none"
-                        placeholder="Jelaskan detail project, fitur utama, teknologi yang digunakan, dll.">{{ old('description') }}</textarea>
+                        placeholder="Input deskripsi project...">{{ old('description') }}</textarea>
                     @error('description')
                         <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                     @enderror
-                    <p class="mt-1 text-xs text-gray-500">Deskripsi singkat tentang project Anda</p>
                 </div>
 
                 {{-- Link Field --}}
@@ -78,11 +76,10 @@
                     </label>
                     <input type="url" id="link" name="link" value="{{ old('link') }}"
                         class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#52a08a] focus:border-transparent transition-all duration-200"
-                        placeholder="https://example.com/project">
+                        placeholder="Input link project...">
                     @error('link')
                         <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                     @enderror
-                    <p class="mt-1 text-xs text-gray-500">URL website atau repository project</p>
                 </div>
 
                 {{-- Image Upload Field --}}
@@ -91,8 +88,8 @@
                         Gambar Project
                     </label>
                     <div class="relative">
-                        <input type="file" id="image" name="image" accept="image/*"
-                            class="hidden" onchange="previewImage(event)">
+                        <input type="file" id="image" name="image" accept="image/*" class="hidden"
+                            onchange="previewImage(event)">
                         <label for="image"
                             class="flex flex-col items-center justify-center w-full h-48 border-2 border-dashed border-gray-300 rounded-lg cursor-pointer hover:border-[#52a08a] transition-colors duration-200 bg-gray-50 hover:bg-gray-100">
                             <div id="preview-container" class="hidden w-full h-full p-4">
@@ -116,20 +113,17 @@
                 </div>
 
                 {{-- Action Buttons --}}
-                <div class="flex items-center justify-end gap-4 pt-6 border-t border-gray-200">
-                    <a href="{{ route('manage-project') }}"
-                        class="px-6 py-2.5 border border-gray-300 text-gray-700 font-semibold rounded-lg hover:bg-gray-50 transition-all duration-200">
-                        Batal
-                    </a>
+
+                <div class="flex justify-end">
                     <button type="submit"
                         class="px-6 py-2.5 bg-[#52a08a] hover:bg-[#466e62] text-white font-semibold rounded-lg shadow-lg transition-all duration-200 flex items-center gap-2">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M5 13l4 4L19 7" />
-                        </svg>
+                        {{-- <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                        </svg> --}}
                         Simpan Project
                     </button>
                 </div>
+
             </form>
         </div>
     </div>

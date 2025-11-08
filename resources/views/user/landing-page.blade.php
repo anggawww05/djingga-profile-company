@@ -10,14 +10,8 @@
                     Djingga Company
                 </h1>
                 <p class="text-lg md:text-xl font-medium opacity-90 max-w-xl text-justify">
-                    Djingga adalah perusahaan TI yang berspesialisasi dalam memberikan solusi teknologi inovatif untuk
-                    bisnis.
-                    Kami menyediakan layanan pengembangan web, pengembangan aplikasi seluler, pemasaran digital, dan
-                    konsultasi TI untuk
-                    membantu klien kami berkembang dan sukses di era digital.
-                    Dengan tim profesional berpengalaman, Djingga berkomitmen untuk memberikan solusi berkualitas tinggi,
-                    andal, dan
-                    disesuaikan dengan kebutuhan bisnis Anda.
+                    Menyediakan solusi teknologi inovatif untuk membantu bisnis atau perusahaan anda berkembang di era
+                    digital.
                 </p>
                 <a href="#about"
                     class="mt-4 bg-[#52a08a] hover:bg-[#466e62] text-white font-semibold py-3 px-10 rounded-full shadow-xl transition-all duration-200 text-lg tracking-wide">
@@ -46,13 +40,14 @@
                 </h2>
                 <div class="w-20 h-1 bg-[#52a08a] rounded mb-4"></div>
                 <p class="text-lg text-gray-700 leading-relaxed">
-                    <span class="font-semibold text-[#52a08a]">Djingga Company</span> adalah perusahaan IT yang berfokus
-                    pada solusi teknologi inovatif untuk bisnis. Kami menyediakan layanan pengembangan website, aplikasi
-                    mobile, digital marketing, dan konsultasi IT untuk membantu klien berkembang di era digital.
+                    <span class="font-semibold text-[#52a08a]">Djingga Company</span> adalah perusahaan IT yang beroperasi
+                    di Indonesia, tepatnya di Bali. Kami merupakan spesialis dalam menyediakan solusi teknologi yang
+                    disesuaikan untuk berbagai sektor di Indonesia.
                 </p>
                 <p class="text-lg text-gray-700 leading-relaxed">
-                    Dengan tim profesional berpengalaman, kami berkomitmen memberikan solusi berkualitas, handal, dan sesuai
-                    kebutuhan bisnis Anda. Kolaborasi, inovasi, dan kepuasan klien adalah prioritas utama kami.
+                    Dengan tim profesional berpengalaman, kami berkomitmen memberikan solusi berkualitas, inovatif, dan
+                    sesuai
+                    kebutuhan bisnis anda. Kepuasan klien adalah prioritas utama kami.
                 </p>
                 <a href="#services"
                     class="inline-block mt-4 bg-[#52a08a] hover:bg-[#466e62] text-white font-semibold py-3 px-8 rounded-full shadow-lg transition-all duration-200 text-lg">
@@ -79,47 +74,50 @@
                 <div
                     class="bg-white rounded-3xl shadow-xl p-8 flex flex-col items-center hover:-translate-y-2 transition-all duration-300 group">
                     <div class="bg-[#52a08a]/10 rounded-full p-5 mb-6">
-                        <svg class="w-12 h-12 text-[#52a08a] group-hover:scale-110 transition" fill="none"
-                            stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                            <path d="M4 4h16v16H4z" stroke-linecap="round" stroke-linejoin="round" />
-                            <path d="M8 8h8v8H8z" stroke-linecap="round" stroke-linejoin="round" />
+                        <svg class="w-12 h-12 text-[#52a08a]" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                            width="24" height="24" fill="none" viewBox="0 0 24 24">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M5.35709 16V5.78571c0-.43393.34822-.78571.77777-.78571H18.5793c.4296 0 .7778.35178.7778.78571V16M5.35709 16h-1c-.55229 0-1 .4477-1 1v1c0 .5523.44771 1 1 1H20.3571c.5523 0 1-.4477 1-1v-1c0-.5523-.4477-1-1-1h-1M5.35709 16H19.3571M9.35709 8l2.62501 2.5L9.35709 13m4.00001 0h2" />
                         </svg>
                     </div>
                     <h3 class="text-2xl font-semibold mb-3 text-[#23272F]">Web Development</h3>
                     <p class="text-gray-600 text-center mb-4">
-                        Pembuatan website profesional, responsif, dan sesuai kebutuhan bisnis Anda.
+                        Perancangan website profesional, responsif, dan sesuai kebutuhan bisnis Anda.
                     </p>
-                    <a href="#" class="text-[#52a08a] font-semibold hover:underline">Selengkapnya</a>
+                    {{-- <a href="#" class="text-[#52a08a] font-semibold hover:underline">Selengkapnya</a> --}}
                 </div>
                 <div
                     class="bg-white rounded-3xl shadow-xl p-8 flex flex-col items-center hover:-translate-y-2 transition-all duration-300 group">
                     <div class="bg-[#52a08a]/10 rounded-full p-5 mb-6">
-                        <svg class="w-12 h-12 text-[#52a08a] group-hover:scale-110 transition" fill="none"
-                            stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                            <path d="M4 4h16v16H4z" stroke-linecap="round" stroke-linejoin="round" />
-                            <path d="M8 8h8v8H8z" stroke-linecap="round" stroke-linejoin="round" />
+                        <svg class="w-12 h-12 text-[#52a08a]" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                            width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                            <path fill-rule="evenodd"
+                                d="M5 4a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V4Zm12 12V5H7v11h10Zm-5 1a1 1 0 1 0 0 2h.01a1 1 0 1 0 0-2H12Z"
+                                clip-rule="evenodd" />
                         </svg>
+
                     </div>
-                    <h3 class="text-2xl font-semibold mb-3 text-[#23272F]">Web Development</h3>
+                    <h3 class="text-2xl font-semibold mb-3 text-[#23272F]">Mobile Development</h3>
                     <p class="text-gray-600 text-center mb-4">
-                        Pembuatan website profesional, responsif, dan sesuai kebutuhan bisnis Anda.
+                        Perancangan aplikasi mobile yang user-friendly untuk platform iOS dan Android.
                     </p>
-                    <a href="#" class="text-[#52a08a] font-semibold hover:underline">Selengkapnya</a>
+                    {{-- <a href="#" class="text-[#52a08a] font-semibold hover:underline">Selengkapnya</a> --}}
                 </div>
                 <div
                     class="bg-white rounded-3xl shadow-xl p-8 flex flex-col items-center hover:-translate-y-2 transition-all duration-300 group">
                     <div class="bg-[#52a08a]/10 rounded-full p-5 mb-6">
-                        <svg class="w-12 h-12 text-[#52a08a] group-hover:scale-110 transition" fill="none"
-                            stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                            <path d="M4 4h16v16H4z" stroke-linecap="round" stroke-linejoin="round" />
-                            <path d="M8 8h8v8H8z" stroke-linecap="round" stroke-linejoin="round" />
+                        <svg class="w-12 h-12 text-[#52a08a]" aria-hidden="true"
+                            xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
+                            viewBox="0 0 24 24">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M13.213 9.787a3.391 3.391 0 0 0-4.795 0l-3.425 3.426a3.39 3.39 0 0 0 4.795 4.794l.321-.304m-.321-4.49a3.39 3.39 0 0 0 4.795 0l3.424-3.426a3.39 3.39 0 0 0-4.794-4.795l-1.028.961" />
                         </svg>
                     </div>
-                    <h3 class="text-2xl font-semibold mb-3 text-[#23272F]">Web Development</h3>
+                    <h3 class="text-2xl font-semibold mb-3 text-[#23272F]">Network</h3>
                     <p class="text-gray-600 text-center mb-4">
-                        Pembuatan website profesional, responsif, dan sesuai kebutuhan bisnis Anda.
+                        Perancangan jaringan komputer yang optimal dan aman untuk mendukung bisnis Anda.
                     </p>
-                    <a href="#" class="text-[#52a08a] font-semibold hover:underline">Selengkapnya</a>
+                    {{-- <a href="#" class="text-[#52a08a] font-semibold hover:underline">Selengkapnya</a> --}}
                 </div>
                 <!-- Service 2 -->
 

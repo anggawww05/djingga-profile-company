@@ -5,12 +5,9 @@
     <div class="p-6 border-b border-gray-200">
         <div class="flex items-center justify-between">
             <div class="flex items-center space-x-3">
-                <div
-                    class="w-10 h-10 bg-gradient-to-br from-[#52a08a] to-[#578E7E] rounded-lg flex items-center justify-center">
-                    <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
-                    </svg>
-                </div>
+
+                <img src="{{ asset('assets/logo-djingga-2.png') }}" alt="Djingga" class="w-8 h-8 object-contain">
+
                 <div>
                     <h2 class="text-lg font-bold text-[#23272F]">Djingga</h2>
                     <p class="text-xs text-gray-500">Admin Panel</p>
@@ -28,11 +25,12 @@
     {{-- Navigation Menu --}}
     <nav class="p-4 space-y-2">
         {{-- Dashboard Menu --}}
+        @php $isActive = request()->routeIs('dashboard'); @endphp
         <a href="{{ route('dashboard') }}"
-            class="sidebar-menu-item group flex items-center space-x-3 px-4 py-3 rounded-lg hover:bg-[#52a08a]/10 transition-all duration-200 hover:translate-x-1">
+            class="sidebar-menu-item group flex items-center space-x-3 px-4 py-3 rounded-lg transition-all duration-200 {{ $isActive ? 'bg-[#52a08a]/10 translate-x-1' : 'hover:bg-[#52a08a]/10 hover:translate-x-1' }}">
             <div
-                class="p-2 bg-[#52a08a]/10 rounded-lg group-hover:bg-[#52a08a] group-hover:text-white transition-all duration-200">
-                <svg class="w-5 h-5 text-[#52a08a] group-hover:text-white" fill="none" stroke="currentColor"
+                class="p-2 rounded-lg transition-all duration-200 {{ $isActive ? 'bg-[#52a08a] text-white' : 'bg-[#52a08a]/10 group-hover:bg-[#52a08a] group-hover:text-white' }}">
+                <svg class="w-5 h-5 {{ $isActive ? 'text-white' : 'text-[#52a08a] group-hover:text-white' }}" fill="none" stroke="currentColor"
                     viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                         d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2H5a2 2 0 00-2-2z" />
@@ -41,8 +39,8 @@
                 </svg>
             </div>
             <div class="flex-1">
-                <span class="text-[#23272F] font-medium group-hover:text-[#52a08a] transition-colors">Dashboard</span>
-                {{-- <p class="text-xs text-gray-500 group-hover:text-[#52a08a]/70">Overview & Analytics</p> --}}
+                <span class="text-[#23272F] font-medium transition-colors {{ $isActive ? 'text-[#52a08a]' : 'group-hover:text-[#52a08a]' }}">Dashboard</span>
+                <p class="text-xs text-gray-500 {{ $isActive ? 'text-[#52a08a]/70' : 'group-hover:text-[#52a08a]/70' }}">Overview Data</p>
             </div>
             <div class="opacity-0 group-hover:opacity-100 transition-opacity">
                 <svg class="w-4 h-4 text-[#52a08a]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -52,67 +50,69 @@
         </a>
 
         {{-- Project Menu --}}
+        @php $isActive = request()->routeIs('manage-project'); @endphp
         <a href="{{ route('manage-project') }}"
-            class="sidebar-menu-item group flex items-center space-x-3 px-4 py-3 rounded-lg hover:bg-[#52a08a]/10 transition-all duration-200 hover:translate-x-1">
+            class="sidebar-menu-item group flex items-center space-x-3 px-4 py-3 rounded-lg transition-all duration-200 {{ $isActive ? 'bg-[#52a08a]/10 translate-x-1' : 'hover:bg-[#52a08a]/10 hover:translate-x-1' }}">
             <div
-                class="p-2 bg-[#578E7E]/10 rounded-lg group-hover:bg-[#578E7E] group-hover:text-white transition-all duration-200">
-                <svg class="w-5 h-5 text-[#578E7E] group-hover:text-white" fill="none" stroke="currentColor"
+                class="p-2 rounded-lg transition-all duration-200 {{ $isActive ? 'bg-[#52a08a] text-white' : 'bg-[#52a08a]/10 group-hover:bg-[#52a08a] group-hover:text-white' }}">
+                <svg class="w-5 h-5 {{ $isActive ? 'text-white' : 'text-[#52a08a] group-hover:text-white' }}" fill="none" stroke="currentColor"
                     viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                         d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
                 </svg>
             </div>
             <div class="flex-1">
-                <span class="text-[#23272F] font-medium group-hover:text-[#578E7E] transition-colors">Proyek</span>
-                {{-- <p class="text-xs text-gray-500 group-hover:text-[#578E7E]/70">Manage Projects</p> --}}
+                <span class="text-[#23272F] font-medium transition-colors {{ $isActive ? 'text-[#52a08a]' : 'group-hover:text-[#52a08a]' }}">Project</span>
+                <p class="text-xs text-gray-500 {{ $isActive ? 'text-[#52a08a]/70' : 'group-hover:text-[#52a08a]/70' }}">Kelola Project</p>
             </div>
             <div class="opacity-0 group-hover:opacity-100 transition-opacity">
-                <svg class="w-4 h-4 text-[#578E7E]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg class="w-4 h-4 text-[#52a08a]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
                 </svg>
             </div>
         </a>
 
         {{-- Activities Menu --}}
+        @php $isActive = request()->routeIs('manage-activity'); @endphp
         <a href="{{ route('manage-activity') }}"
-            class="sidebar-menu-item group flex items-center space-x-3 px-4 py-3 rounded-lg hover:bg-[#52a08a]/10 transition-all duration-200 hover:translate-x-1">
+            class="sidebar-menu-item group flex items-center space-x-3 px-4 py-3 rounded-lg transition-all duration-200 {{ $isActive ? 'bg-[#52a08a]/10 translate-x-1' : 'hover:bg-[#52a08a]/10 hover:translate-x-1' }}">
             <div
-                class="p-2 bg-[#466e62]/10 rounded-lg group-hover:bg-[#466e62] group-hover:text-white transition-all duration-200">
-                <svg class="w-5 h-5 text-[#466e62] group-hover:text-white" fill="none" stroke="currentColor"
+                class="p-2 rounded-lg transition-all duration-200 {{ $isActive ? 'bg-[#52a08a] text-white' : 'bg-[#52a08a]/10 group-hover:bg-[#52a08a] group-hover:text-white' }}">
+                <svg class="w-5 h-5 {{ $isActive ? 'text-white' : 'text-[#52a08a] group-hover:text-white' }}" fill="none" stroke="currentColor"
                     viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                         d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                 </svg>
             </div>
             <div class="flex-1">
-                <span class="text-[#23272F] font-medium group-hover:text-[#466e62] transition-colors">Aktivitas</span>
-                {{-- <p class="text-xs text-gray-500 group-hover:text-[#466e62]/70">Events & Updates</p> --}}
+                <span class="text-[#23272F] font-medium transition-colors {{ $isActive ? 'text-[#52a08a]' : 'group-hover:text-[#52a08a]' }}">Aktivitas</span>
+                <p class="text-xs text-gray-500 {{ $isActive ? 'text-[#52a08a]/70' : 'group-hover:text-[#52a08a]/70' }}">Kelola Aktivitas</p>
             </div>
             <div class="opacity-0 group-hover:opacity-100 transition-opacity">
-                <svg class="w-4 h-4 text-[#466e62]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg class="w-4 h-4 text-[#52a08a]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
                 </svg>
             </div>
         </a>
 
         {{-- Consultation Menu --}}
+        @php $isActive = request()->routeIs('manage-consultation'); @endphp
         <a href="{{ route('manage-consultation') }}"
-            class="sidebar-menu-item group flex items-center space-x-3 px-4 py-3 rounded-lg hover:bg-[#52a08a]/10 transition-all duration-200 hover:translate-x-1">
+            class="sidebar-menu-item group flex items-center space-x-3 px-4 py-3 rounded-lg transition-all duration-200 {{ $isActive ? 'bg-[#52a08a]/10 translate-x-1' : 'hover:bg-[#52a08a]/10 hover:translate-x-1' }}">
             <div
-                class="p-2 bg-[#23272F]/10 rounded-lg group-hover:bg-[#23272F] group-hover:text-white transition-all duration-200">
-                <svg class="w-5 h-5 text-[#23272F] group-hover:text-white" fill="none" stroke="currentColor"
+                class="p-2 rounded-lg transition-all duration-200 {{ $isActive ? 'bg-[#52a08a] text-white' : 'bg-[#52a08a]/10 group-hover:bg-[#52a08a] group-hover:text-white' }}">
+                <svg class="w-5 h-5 {{ $isActive ? 'text-white' : 'text-[#52a08a] group-hover:text-white' }}" fill="none" stroke="currentColor"
                     viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                         d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a2 2 0 01-2-2v-6a2 2 0 012-2h8z" />
                 </svg>
             </div>
             <div class="flex-1">
-                <span
-                    class="text-[#23272F] font-medium group-hover:text-[#23272F] transition-colors">Konsultasi</span>
-                {{-- <p class="text-xs text-gray-500 group-hover:text-[#23272F]/70">Client Consultations</p> --}}
+                <span class="text-[#23272F] font-medium transition-colors {{ $isActive ? 'text-[#52a08a]' : 'group-hover:text-[#52a08a]' }}">Konsultasi</span>
+                <p class="text-xs text-gray-500 {{ $isActive ? 'text-[#52a08a]/70' : 'group-hover:text-[#52a08a]/70' }}">Konsultasi Klien</p>
             </div>
             <div class="opacity-0 group-hover:opacity-100 transition-opacity">
-                <svg class="w-4 h-4 text-[#23272F]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg class="w-4 h-4 text-[#52a08a]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
                 </svg>
             </div>

@@ -1,11 +1,10 @@
 @extends('admin.main')
 
 @section('container')
-
     <div class="mb-6">
         <div class="flex items-center justify-between">
             <div>
-                <h1 class="text-2xl font-bold text-[#23272F]">Manage Consultations</h1>
+                <h1 class="text-2xl font-bold text-[#23272F]">Kelola Konsultasi</h1>
                 <p class="text-gray-600 mt-1">Kelola semua permintaan konsultasi yang masuk</p>
             </div>
 
@@ -13,23 +12,29 @@
                 <div class="flex items-center gap-3">
                     <div class="flex items-center gap-4">
                         <form action="{{ route('manage-consultation.search') }}" method="GET" class="flex items-center">
-                            <input type="text" name="q" value="{{ request('q') }}" placeholder="Cari konsultasi..."
+                            <input type="hidden" name="status" value="{{ request('status', 'pending') }}">
+                            <input type="text" name="q" value="{{ request('q') }}"
+                                placeholder="Cari konsultasi..."
                                 class="px-3 py-2 border border-gray-300 rounded-l-md focus:outline-none" />
                             <button type="submit" class="px-3 py-2 bg-[#52a08a] text-white rounded-r-md">Cari</button>
                         </form>
-
-                        <a href="{{ route('manage-consultation.add') }}"
-                            class="bg-[#52a08a] hover:bg-[#466e62] text-white font-semibold py-2 px-6 rounded-lg shadow-lg transition-all duration-200 flex items-center gap-2">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                                aria-hidden="true">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
-                            </svg>
-                            Tambah Konsultasi
-                        </a>
-                    </div>
-                </div>
             @endif
+            <button id="open-category-modal" type="button"
+                class="bg-[#52a08a] hover:bg-[#466e62] text-white font-semibold py-2 px-6 rounded-lg shadow-lg transition-all duration-200 flex items-center gap-2">
+                Kelola Layanan
+            </button>
+            @if ($consultations->count() > 0)
+                <a href="{{ route('manage-consultation.add') }}"
+                    class="bg-[#52a08a] hover:bg-[#466e62] text-white font-semibold py-2 px-6 rounded-lg shadow-lg transition-all duration-200 flex items-center gap-2">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+                    </svg>
+                    Tambah Konsultasi
+                </a>
         </div>
+    </div>
+    @endif
+    </div>
     </div>
 
     {{-- Success Message --}}
@@ -44,6 +49,20 @@
         </div>
     @endif
 
+    <div class="mb-4 flex items-end gap-6 border-b border-gray-100">
+        <a href="?status=pending"
+            class="pb-3 text-sm font-semibold transition-colors duration-150 {{ request('status', 'pending') === 'pending' ? 'text-[#23272F] border-b-2 border-[#52a08a]' : 'text-gray-600 hover:text-[#23272F]' }}"
+            aria-current="{{ request('status', 'pending') === 'pending' ? 'page' : 'false' }}">
+            Belum Selesai
+        </a>
+
+        <a href="?status=done"
+            class="pb-3 text-sm font-semibold transition-colors duration-150 {{ request('status') === 'done' ? 'text-[#23272F] border-b-2 border-[#52a08a]' : 'text-gray-600 hover:text-[#23272F]' }}"
+            aria-current="{{ request('status') === 'done' ? 'page' : 'false' }}">
+            Selesai
+        </a>
+    </div>
+
     {{-- Projects Table --}}
     <div class="bg-white rounded-3xl shadow-lg border border-[#52a08a]/10 overflow-hidden">
         <div class="overflow-x-auto">
@@ -54,19 +73,19 @@
                             No
                         </th>
                         <th class="px-6 py-4 text-left text-xs font-semibold text-[#23272F] uppercase tracking-wider">
-                            Name
+                            Nama
                         </th>
                         <th class="px-6 py-4 text-left text-xs font-semibold text-[#23272F] uppercase tracking-wider">
-                            Company
+                            Perusahaan
                         </th>
                         <th class="px-6 py-4 text-left text-xs font-semibold text-[#23272F] uppercase tracking-wider">
-                            Service
+                            Layanan
                         </th>
                         <th class="px-6 py-4 text-center text-xs font-semibold text-[#23272F] uppercase tracking-wider">
-                            Description
+                            Deskripsi
                         </th>
                         <th class="px-6 py-4 text-center text-xs font-semibold text-[#23272F] uppercase tracking-wider">
-                            Action
+                            Aksi
                         </th>
                     </tr>
                 </thead>
@@ -95,29 +114,19 @@
                                     {{-- Detail Button --}}
                                     <a href="https://mail.google.com/mail/?view=cm&fs=1&to={{ $consultation->email }}"
                                         target="_blank" rel="noopener noreferrer"
-                                        class="inline-flex items-center px-3 py-1.5 bg-yellow-500 hover:bg-yellow-600 text-black text-sm font-medium rounded-lg transition-colors duration-200">
-                                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M3 8l9 6 9-6" />
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M21 8v8a2 2 0 01-2 2H5a2 2 0 01-2-2V8" />
-                                        </svg>
+                                        class="inline-flex items-center px-3 py-1.5 text-white bg-[#52a08a] hover:bg-[#466e62] text-sm font-medium rounded-lg transition-colors duration-200">
+
                                         Email
                                     </a>
                                     <a href="{{ route('manage-consultation.detail', $consultation->id) }}"
                                         class="inline-flex items-center px-3 py-1.5 bg-blue-500 hover:bg-blue-600 text-white text-sm font-medium rounded-lg transition-colors duration-200">
-                                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M2.458 12C3.732 7.943 7.523 5 12 5s8.268 2.943 9.542 7c-1.274 4.057-5.065 7-9.542 7S3.732 16.057 2.458 12z" />
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                                        </svg>
+
                                         Detail
                                     </a>
 
                                     {{-- Edit Button --}}
                                     <a href="{{ route('manage-consultation.edit', $consultation->id) }}"
-                                        class="inline-flex items-center px-3 py-1.5 bg-[#52a08a] hover:bg-[#466e62] text-white text-sm font-medium rounded-lg transition-colors duration-200">
+                                        class="inline-flex items-center px-3 py-1.5 bg-yellow-500 hover:bg-yellow-600 text-white text-sm font-medium rounded-lg transition-colors duration-200">
                                         Edit
                                     </a>
 
@@ -129,7 +138,7 @@
                                         @method('DELETE')
                                         <button type="submit"
                                             class="inline-flex items-center px-3 py-1.5 bg-red-500 hover:bg-red-600 text-white text-sm font-medium rounded-lg transition-colors duration-200">
-                                            Delete
+                                            Hapus
                                         </button>
                                     </form>
                                 </div>
@@ -143,11 +152,11 @@
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                             d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4" />
                                     </svg>
-                                    <p class="text-lg font-medium mb-2">Belum ada project</p>
-                                    <p class="text-sm mb-4">Mulai tambahkan project pertama Anda</p>
-                                    <a href="#"
+                                    <p class="text-lg font-medium mb-2">Belum ada konsultasi</p>
+                                    {{-- <p class="text-sm mb-4">Mulai tambahkan konsultasi pertama Anda</p> --}}
+                                    <a href="{{ route('manage-consultation.add') }}"
                                         class="bg-[#52a08a] hover:bg-[#466e62] text-white font-semibold py-2 px-6 rounded-lg shadow-lg transition-all duration-200">
-                                        Tambah Project
+                                        Tambah Konsultasi
                                     </a>
                                 </div>
                             </td>
@@ -158,4 +167,83 @@
             {{ $consultations->links('components.pagination') }}
         </div>
     </div>
+
+    {{-- Category Modal --}}
+    <div id="category-modal" class="fixed inset-0 z-50 hidden bg-black/40">
+        <div class="bg-white w-full max-w-2xl rounded-2xl shadow-lg overflow-hidden mx-4">
+            <div class="p-4 border-b flex items-center justify-between">
+                <h3 class="text-lg font-semibold">Kelola Layanan</h3>
+                <button id="close-category-modal" class="text-gray-500 hover:text-gray-700">✕</button>
+            </div>
+
+            <div class="p-4">
+                {{-- Form to add category --}}
+                <form action="{{ route('manage-consultation.service.store') }}" method="POST" class="mb-4">
+                    @csrf
+                    <div class="flex gap-2">
+                        <input type="text" name="service_name" placeholder="Nama layanan" required
+                            class="flex-1 px-3 py-2 border border-gray-300 rounded-md focus:outline-none" />
+                        <button type="submit" class="px-4 py-2 bg-[#52a08a] text-white rounded-md">Tambah</button>
+                    </div>
+                </form>
+
+                {{-- Categories table --}}
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm">
+                        <thead class="bg-gray-50">
+                            <tr class="text-left text-xs text-gray-500 uppercase tracking-wider">
+                                <th class="px-4 py-3">No</th>
+                                <th class="px-4 py-3">Layanan</th>
+                                <th class="px-4 py-3 text-right">Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white divide-y divide-gray-100">
+                            @forelse ($services as $service)
+                                <tr class="hover:bg-gray-50">
+                                    <td class="px-4 py-3 text-gray-600">{{ $loop->iteration }}</td>
+                                    <td class="px-4 py-3 text-gray-800">{{ $service->service_name }}</td>
+                                    <td class="px-4 py-3 text-right">
+                                        <form action="{{ route('manage-consultation.service.destroy', $service->id) }}"
+                                            method="POST" class="inline-block"
+                                            onsubmit="return confirm('Hapus kategori ini?');">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit"
+                                                class="px-3 py-1.5 bg-red-500 hover:bg-red-600 text-white rounded-md text-xs">Hapus</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td colspan="3" class="py-6 text-center text-gray-400">Belum ada layanan</td>
+                                </tr>
+                            @endforelse
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        (function() {
+            const openBtn = document.getElementById('open-category-modal');
+            const closeBtn = document.getElementById('close-category-modal');
+            const modal = document.getElementById('category-modal');
+            if (openBtn && closeBtn && modal) {
+                openBtn.addEventListener('click', () => {
+                    modal.classList.remove('hidden');
+                    modal.classList.add('flex', 'items-center', 'justify-center');
+                });
+                const hide = () => {
+                    modal.classList.add('hidden');
+                    modal.classList.remove('flex', 'items-center', 'justify-center');
+                };
+                closeBtn.addEventListener('click', hide);
+                modal.addEventListener('click', (e) => {
+                    if (e.target === modal) hide();
+                });
+            }
+        })();
+    </script>
 @endsection

@@ -9,7 +9,7 @@
             </h1>
             <div class="w-20 h-1 bg-[#52a08a] rounded mx-auto mb-6"></div>
             <p class="text-lg text-white/90 max-w-2xl mx-auto">
-                Dapatkan konsultasi ahli dari tim profesional kami untuk mengembangkan bisnis dan solusi teknologi yang tepat sasaran.
+                Lakukan konsultasi dengan tim mengenai kebutuhan bisnis dan teknologi Anda.
             </p>
         </div>
         <div class="absolute top-0 right-0 w-48 h-48 bg-[#52a08a]/10 rounded-full blur-3xl"></div>
@@ -38,22 +38,22 @@
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div>
                             <label class="block text-sm font-semibold text-[#23272F] mb-2">Nama Lengkap</label>
-                            <input name="name" type="text" required class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:border-[#52a08a] transition-colors" placeholder="Masukkan nama lengkap">
+                            <input name="name" type="text" required class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:border-[#52a08a] transition-colors" placeholder="Input nama lengkap...">
                         </div>
                         <div>
                             <label class="block text-sm font-semibold text-[#23272F] mb-2">Email</label>
-                            <input name="email" type="email" class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:border-[#52a08a] transition-colors" placeholder="nama@email.com">
+                            <input name="email" type="email" class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:border-[#52a08a] transition-colors" placeholder="Input email...">
                         </div>
                     </div>
 
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div>
                             <label class="block text-sm font-semibold text-[#23272F] mb-2">No. Telepon</label>
-                            <input name="phone" type="tel" class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:border-[#52a08a] transition-colors" placeholder="+62 xxx-xxxx-xxxx">
+                            <input name="phone" type="tel" class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:border-[#52a08a] transition-colors" placeholder="Input no. telepon...">
                         </div>
                         <div>
                             <label class="block text-sm font-semibold text-[#23272F] mb-2">Perusahaan</label>
-                            <input name="company" type="text" class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:border-[#52a08a] transition-colors" placeholder="Nama perusahaan">
+                            <input name="company" type="text" class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:border-[#52a08a] transition-colors" placeholder="Input nama perusahaan...">
                         </div>
                     </div>
 
@@ -69,7 +69,7 @@
 
                     <div>
                         <label class="block text-sm font-semibold text-[#23272F] mb-2">Deskripsi Kebutuhan</label>
-                        <textarea name="description" rows="4" class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:border-[#52a08a] transition-colors" placeholder="Jelaskan kebutuhan dan tantangan yang dihadapi..."></textarea>
+                        <textarea name="description" rows="4" class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:border-[#52a08a] transition-colors" placeholder="Input deskripsi kebutuhan..."></textarea>
                     </div>
 
                     <button type="submit" class="w-full bg-[#52a08a] hover:bg-[#466e62] text-white font-semibold py-4 px-8 rounded-xl shadow-lg transition-all duration-200">

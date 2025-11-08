@@ -47,12 +47,12 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
                         <label class="block text-sm font-semibold text-[#23272F] mb-2">Nama Lengkap <span class="text-red-500">*</span></label>
-                        <input name="name" type="text" required value="{{ old('name') }}" class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:border-[#52a08a] transition-colors" placeholder="Masukkan nama lengkap">
+                        <input name="name" type="text" required value="{{ old('name') }}" class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:border-[#52a08a] transition-colors" placeholder="Input nama lengkap..">
                         @error('name')<p class="mt-1 text-sm text-red-600">{{ $message }}</p>@enderror
                     </div>
                     <div>
                         <label class="block text-sm font-semibold text-[#23272F] mb-2">Email</label>
-                        <input name="email" type="email" value="{{ old('email') }}" class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:border-[#52a08a] transition-colors" placeholder="nama@email.com">
+                        <input name="email" type="email" value="{{ old('email') }}" class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:border-[#52a08a] transition-colors" placeholder="Input email...">
                         @error('email')<p class="mt-1 text-sm text-red-600">{{ $message }}</p>@enderror
                     </div>
                 </div>
@@ -60,11 +60,11 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
                     <div>
                         <label class="block text-sm font-semibold text-[#23272F] mb-2">No. Telepon</label>
-                        <input name="phone" type="tel" value="{{ old('phone') }}" class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:border-[#52a08a] transition-colors" placeholder="+62 xxx-xxxx-xxxx">
+                        <input name="phone" type="tel" value="{{ old('phone') }}" class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:border-[#52a08a] transition-colors" placeholder="Input no. telepon...">
                     </div>
                     <div>
                         <label class="block text-sm font-semibold text-[#23272F] mb-2">Perusahaan</label>
-                        <input name="company" type="text" value="{{ old('company') }}" class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:border-[#52a08a] transition-colors" placeholder="Nama perusahaan">
+                        <input name="company" type="text" value="{{ old('company') }}" class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:border-[#52a08a] transition-colors" placeholder="Input nama perusahaan...">
                     </div>
                 </div>
 
@@ -79,12 +79,20 @@
                 </div>
 
                 <div class="mt-6">
-                    <label class="block text-sm font-semibold text-[#23272F] mb-2">Deskripsi Kebutuhan</label>
-                    <textarea name="description" rows="4" class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:border-[#52a08a] transition-colors" placeholder="Jelaskan kebutuhan dan tantangan yang dihadapi...">{{ old('description') }}</textarea>
+                    <label class="block text-sm font-semibold text-[#23272F] mb-2">Status</label>
+                    <select name="status" class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:border-[#52a08a] transition-colors">
+                        <option value="pending" @selected(old('status', 'pending') == 'pending')>Belum Selesai</option>
+                        <option value="done" @selected(old('status') == 'done')>Selesai</option>
+                    </select>
+                    @error('status')<p class="mt-1 text-sm text-red-600">{{ $message }}</p>@enderror
                 </div>
 
-                <div class="flex items-center justify-end gap-4 pt-6 border-t border-gray-200 mt-8">
-                    <a href="{{ route('manage-consultation') }}" class="px-6 py-2.5 border border-gray-300 text-gray-700 font-semibold rounded-lg hover:bg-gray-50 transition-all duration-200">Batal</a>
+                <div class="mt-6">
+                    <label class="block text-sm font-semibold text-[#23272F] mb-2">Deskripsi Kebutuhan</label>
+                    <textarea name="description" rows="4" class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:border-[#52a08a] transition-colors" placeholder="Input deskripsi kebutuhan...">{{ old('description') }}</textarea>
+                </div>
+
+                <div class="flex justify-end mt-4">
                     <button type="submit" class="px-6 py-2.5 bg-[#52a08a] hover:bg-[#466e62] text-white font-semibold rounded-lg shadow-lg transition-all duration-200">Simpan</button>
                 </div>
             </form>

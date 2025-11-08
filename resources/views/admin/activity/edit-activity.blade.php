@@ -11,8 +11,8 @@
                 </svg>
             </a>
             <div>
-                <h1 class="text-2xl font-bold text-[#23272F]">Edit Activity</h1>
-                <p class="text-gray-600 mt-1">Ubah data activity di bawah dan simpan perubahan</p>
+                <h1 class="text-2xl font-bold text-[#23272F]">Edit Aktivitas</h1>
+                <p class="text-gray-600 mt-1">Ubah data aktivitas di bawah dan simpan perubahan</p>
             </div>
         </div>
     </div>
@@ -44,7 +44,7 @@
             <form action="{{ route('manage-activity.update', $activity->id) }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
-                <input type="hidden" name="old_image" value="{{ $activity->image ?? '' }}">
+                <input type="hidden" name="old_image" value="{{ $activity->image_cover ?? '' }}">
 
                 {{-- Title Field --}}
                 <div class="mb-6">
@@ -65,7 +65,7 @@
                         Deskripsi
                     </label>
                     <textarea id="description" name="description" rows="5"
-                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#52a08a] focus:border-transparent transition-all duration-200 resize-none"
+                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#52a08a] focus:border-transparent transition-all duration-200 resize-none text-justify"
                         placeholder="Jelaskan activity...">{{ old('description', $activity->description) }}</textarea>
                     @error('description')
                         <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
@@ -151,10 +151,26 @@
                     {{-- Preview Thumbnails --}}
                     <div id="gallery-preview" class="mt-4 flex flex-wrap gap-3">
                         @php
-                            // Support both array and JSON stored gallery values
+                            // Build gallery items from relation `galleryActivities` first, fallback to a stored 'gallery' attribute if present.
                             $galleryItems = [];
-                            if (!empty($activity->gallery)) {
-                                $galleryItems = is_array($activity->gallery) ? $activity->gallery : (json_decode($activity->gallery, true) ?: []);
+
+                            if (!empty($activity->galleryActivities) && $activity->galleryActivities->count() > 0) {
+                                foreach ($activity->galleryActivities as $g) {
+                                    if (!empty($g->image)) $galleryItems[] = $g->image;
+                                }
+                            } elseif (!empty($activity->gallery)) {
+                                if (is_string($activity->gallery)) {
+                                    $decoded = json_decode($activity->gallery, true);
+                                    if (is_array($decoded)) {
+                                        $galleryItems = $decoded;
+                                    } else {
+                                        $parts = array_filter(array_map('trim', explode(',', $activity->gallery)));
+                                        if (!empty($parts)) $galleryItems = $parts;
+                                        else $galleryItems = [$activity->gallery];
+                                    }
+                                } elseif (is_array($activity->gallery)) {
+                                    $galleryItems = $activity->gallery;
+                                }
                             }
                         @endphp
 
@@ -170,17 +186,17 @@
 
                 {{-- Action Buttons --}}
                 <div class="flex items-center justify-end gap-4 pt-6 border-t border-gray-200">
-                    <a href="{{ route('manage-activity') }}"
+                    {{-- <a href="{{ route('manage-activity') }}"
                         class="px-6 py-2.5 border border-gray-300 text-gray-700 font-semibold rounded-lg hover:bg-gray-50 transition-all duration-200">
                         Batal
-                    </a>
+                    </a> --}}
                     <button type="submit"
                         class="px-6 py-2.5 bg-[#52a08a] hover:bg-[#466e62] text-white font-semibold rounded-lg shadow-lg transition-all duration-200 flex items-center gap-2">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        {{-- <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M5 13l4 4L19 7" />
-                        </svg>
-                        Perbarui
+                        </svg> --}}
+                        Simpan
                     </button>
                 </div>
             </form>
@@ -191,8 +207,8 @@
     <script>
         // Tampilkan preview awal jika ada gambar existing
         document.addEventListener('DOMContentLoaded', function () {
-            @if(!empty($activity->image))
-                const existingUrl = "{{ asset('storage/' . $activity->image) }}";
+            @if(!empty($activity->image_cover))
+                const existingUrl = "{{ asset('storage/' . ltrim($activity->image_cover, '/')) }}";
                 const imgEl = document.getElementById('preview-image');
                 imgEl.src = existingUrl;
                 document.getElementById('preview-container').classList.remove('hidden');

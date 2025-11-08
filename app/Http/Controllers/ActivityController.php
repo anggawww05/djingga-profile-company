@@ -20,10 +20,39 @@ class ActivityController extends Controller
             });
         }
 
-        $activities = $query->orderBy('created_at', 'desc')->paginate(10);
-        return view('admin.activity.manage-activity', compact('activities'));
+    $activities = $query->orderBy('created_at', 'desc')->paginate(10);
+    // load categories for the manage modal
+    $categories = CategoryActivity::orderBy('category_name')->get();
+    return view('admin.activity.manage-activity', compact('activities', 'categories'));
 
 
+    }
+
+    /**
+     * Store a new category (from modal)
+     */
+    public function storeCategory(Request $request)
+    {
+        $data = $request->validate([
+            'category_name' => 'required|string|max:191',
+        ]);
+
+        $category = new CategoryActivity();
+        $category->category_name = $data['category_name'];
+        $category->save();
+
+        return redirect()->route('manage-activity')->with('success', 'Kategori berhasil ditambahkan.');
+    }
+
+    /**
+     * Delete a category
+     */
+    public function destroyCategory($id)
+    {
+        $category = CategoryActivity::findOrFail($id);
+        $category->delete();
+
+        return redirect()->route('manage-activity')->with('success', 'Kategori berhasil dihapus.');
     }
 
     public function showAddActivity()
@@ -144,5 +173,24 @@ class ActivityController extends Controller
         $activity->delete();
 
         return redirect()->route('manage-activity')->with('success', 'Activity deleted successfully.');
+    }
+
+    public function categoryStore(Request $request)
+    {
+        $data = $request->validate([
+            'category_name' => 'required|string|max:191',
+        ]);
+
+        CategoryActivity::create($data);
+
+        return redirect()->route('manage-activity')->with('success', 'Kategori berhasil ditambahkan.');
+    }
+
+    public function categoryDestroy($id)
+    {
+        $category = CategoryActivity::findOrFail($id);
+        $category->delete();
+
+        return redirect()->route('manage-activity')->with('success', 'Kategori berhasil dihapus.');
     }
 }

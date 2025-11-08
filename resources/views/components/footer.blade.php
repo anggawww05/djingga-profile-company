@@ -43,7 +43,7 @@
                 <nav class="flex flex-col space-y-2 text-gray-300">
                     <a href="#" class="hover:text-[#52a08a] transition">Beranda</a>
                     <a href="#" class="hover:text-[#52a08a] transition">Profil</a>
-                    <a href="#" class="hover:text-[#52a08a] transition">Proyek</a>
+                    <a href="#" class="hover:text-[#52a08a] transition">Project</a>
                     <a href="#" class="hover:text-[#52a08a] transition">Aktivitas</a>
                     <a href="#" class="hover:text-[#52a08a] transition">Konsultasi</a>
                 </nav>
